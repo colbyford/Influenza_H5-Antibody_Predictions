@@ -1,0 +1,94 @@
+cd-hit-est -i gisaid_H5N1_HA.fna -o HAnuc97 -c 0.97 -n 8 -M 160000 -T 8 
+================================================================
+Program: CD-HIT, V4.8.1 (+OpenMP), Aug 20 2021, 08:39:56
+Command: cd-hit-est -i gisaid_H5N1_HA.fna -o HAnuc97 -c 0.97
+         -n 8 -M 160000 -T 8
+
+Started: Tue Apr 30 15:36:35 2024
+================================================================
+                            Output                              
+----------------------------------------------------------------
+total seq: 18906
+longest and shortest : 1870 and 59
+Total letters: 30933271
+Sequences have been sorted
+
+Approximated minimal memory consumption:
+Sequence        : 33M
+Buffer          : 8 X 12M = 101M
+Table           : 2 X 1M = 2M
+Miscellaneous   : 0M
+Total           : 138M
+
+Table limit with the given memory limit:
+Max number of representatives: 4000000
+Max number of word counting entries: 19982749358
+
+# comparing sequences from          0  to       1890
+.---------- new table with       70 representatives
+# comparing sequences from       1890  to       3591
+99.8%---------- new table with       32 representatives
+# comparing sequences from       3591  to       5122
+99.9%---------- new table with        6 representatives
+# comparing sequences from       5122  to       6500
+99.8%---------- new table with       13 representatives
+# comparing sequences from       6500  to       7740
+99.9%---------- new table with       22 representatives
+# comparing sequences from       7740  to       8856
+99.8%---------- new table with       12 representatives
+# comparing sequences from       8856  to       9861
+100.0%---------- new table with        3 representatives
+# comparing sequences from       9861  to      10765
+99.7%---------- new table with        2 representatives
+# comparing sequences from      10765  to      11579
+99.7%---------- new table with        2 representatives
+# comparing sequences from      11579  to      12311
+99.8%---------- new table with        2 representatives
+# comparing sequences from      12311  to      12970
+99.2%---------- new table with        3 representatives
+# comparing sequences from      12970  to      13563
+99.9%---------- new table with        1 representatives
+# comparing sequences from      13563  to      14097
+99.7%---------- new table with        3 representatives
+# comparing sequences from      14097  to      14577
+99.7%---------- new table with        0 representatives
+# comparing sequences from      14577  to      15009
+---------- new table with        3 representatives
+# comparing sequences from      15009  to      15398
+99.9%---------- new table with        0 representatives
+# comparing sequences from      15398  to      15748
+---------- new table with       14 representatives
+# comparing sequences from      15748  to      16063
+..---------- new table with        4 representatives
+# comparing sequences from      16063  to      16347
+98.5%---------- new table with        4 representatives
+# comparing sequences from      16347  to      16602
+99.8%---------- new table with        1 representatives
+# comparing sequences from      16602  to      16832
+99.8%---------- new table with        3 representatives
+# comparing sequences from      16832  to      17039
+99.7%---------- new table with        1 representatives
+# comparing sequences from      17039  to      17225
+100.0%---------- new table with        2 representatives
+# comparing sequences from      17225  to      17393
+99.7%---------- new table with        1 representatives
+# comparing sequences from      17393  to      17544
+99.7%---------- new table with        5 representatives
+# comparing sequences from      17544  to      17680
+99.6%---------- new table with        6 representatives
+# comparing sequences from      17680  to      17802
+...---------- new table with        6 representatives
+# comparing sequences from      17802  to      17912
+99.7%---------- new table with        0 representatives
+# comparing sequences from      17912  to      18906
+---------- new table with       65 representatives
+
+    18906  finished        286  clusters
+
+Approximated maximum memory consumption: 139M
+writing new database
+writing clustering information
+program completed !
+
+Total CPU time 19.73
+
