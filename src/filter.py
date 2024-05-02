@@ -1,6 +1,6 @@
 from Bio import SeqIO
-file = list(SeqIO.parse('gisaid_H5N1_HA.faa','fasta'))
-filtered_file = open('filtered_gisaid_H5N1_HA.faa', 'w')
+file = list(SeqIO.parse('../results/43024/HApro97','fasta'))
+filtered_file = open('../results/filtered_HApro97.faa', 'w')
 for record in file:
 	length = len(record)
 	if length>450:
