@@ -29,6 +29,6 @@ docker image tag cford38/haddock:3.0.0-beta.5 haddock3
 docker run -v .:/data --name haddock3 -it haddock3 /bin/bash
 
 ## Once inside the container
- cd /data/data/experiments/<YOUR EXPERIMENT>
+cd /data/data/experiments/<YOUR EXPERIMENT>
 haddock3 config.cfg
 ```
