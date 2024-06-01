@@ -8,7 +8,7 @@
 #SBATCH --time=5:00:00
 
 export SINGULARITY_CONTAINER_HOME=/home/gridsan/$USER/seqer_shared/N_cytokine_docking
-export input_csv=../cluster_tests/analyses.csv
+export input_csv=../data/experiment/experiment_list.csv
 
 # module load singularity
 # singularity run $SINGULARITY_CONTAINER_HOME/haddock.sif
