@@ -1,5 +1,8 @@
 # Submitting HADDOCK 3 Jobs Through Slurm
 
+
+## Prepare Singularity Image and Test
+
 1. Make a Singularity image from the HADDOCKer image.
 
 ```bash
@@ -20,6 +23,7 @@ haddock3 config.cfg
 
 
 ## Testing in Docker
+
 ````bash
 ## Pull the image and retag it
 docker pull cford38/haddock:3.0.0-beta.5
