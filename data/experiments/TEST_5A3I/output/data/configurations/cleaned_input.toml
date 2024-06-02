@@ -5,9 +5,9 @@ mode = "local"
 # queue_limit = 100
 molecules = ['5a3i_chainsHandL_renumberedLplus1000_onechainA.pdb', '5a3i_chainA_rechainedasB.pdb']
 
-[topoaa]
+['topoaa.1']
 
-[rigidbody]
+['rigidbody.1']
 tolerance = 25
 sampling = 200
 ambig_fname = "ambig.tbl"
@@ -33,27 +33,27 @@ ambig_fname = "ambig.tbl"
 # [caprieval]
 # reference_fname = "5a3i_chainsACD.pdb"
 
-[seletop]
+['seletop.1']
 select = 50
 
 # [caprieval]
 # reference_fname = "5a3i_chainsACD.pdb"
 
-[flexref]
+['flexref.1']
 tolerance = 25
 ambig_fname = "ambig.tbl"
 
 # [caprieval]
 # reference_fname = "5a3i_chainsACD.pdb"
 
-[seletop]
+['seletop.2']
 select = 10
 
 # [emref]
 # tolerance = 5
 # ambig_fname = "ambig.tbl"
 
-[mdref]
+['mdref.1']
 tolerance = 25
 ambig_fname = "ambig.tbl"
 
@@ -65,6 +65,6 @@ ambig_fname = "ambig.tbl"
 # [seletopclusts]
 # top_models = 1
 
-[caprieval]
+['caprieval.1']
 # reference_fname = "5a3i_chainsACD.pdb"
 

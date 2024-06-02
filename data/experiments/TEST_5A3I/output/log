@@ -1,0 +1,154 @@
+[2024-06-01 23:10:46,928 cli INFO] 
+##############################################
+#                                            #
+#                 HADDOCK 3                  #
+#                                            #
+##############################################
+
+Starting HADDOCK 3.0.0 on 2024-06-01 23:10:00
+
+Python 3.9.19 (main, May 14 2024, 09:05:28) 
+[GCC 10.2.1 20210110]
+
+[2024-06-01 23:10:53,771 libworkflow INFO] Reading instructions step 0_topoaa
+[2024-06-01 23:10:53,771 libworkflow INFO] Reading instructions step 1_rigidbody
+[2024-06-01 23:10:53,773 libworkflow INFO] Reading instructions step 2_seletop
+[2024-06-01 23:10:53,773 libworkflow INFO] Reading instructions step 3_flexref
+[2024-06-01 23:10:53,775 libworkflow INFO] Reading instructions step 4_seletop
+[2024-06-01 23:10:53,775 libworkflow INFO] Reading instructions step 5_mdref
+[2024-06-01 23:10:53,777 libworkflow INFO] Reading instructions step 6_caprieval
+[2024-06-01 23:10:53,833 base_cns_module INFO] Running [topoaa] module
+[2024-06-01 23:10:53,834 __init__ INFO] [topoaa] Molecule 1: 5a3i_chainsHandL_renumberedLplus1000_onechainA.pdb
+[2024-06-01 23:10:53,856 __init__ INFO] [topoaa] Sanitizing molecule 5a3i_chainsHandL_renumberedLplus1000_onechainA.pdb
+[2024-06-01 23:10:53,920 __init__ INFO] [topoaa] Topology CNS input created in 5a3i_chainsHandL_renumberedLplus1000_onechainA.inp
+[2024-06-01 23:10:53,920 __init__ INFO] [topoaa] Molecule 2: 5a3i_chainA_rechainedasB.pdb
+[2024-06-01 23:10:53,939 __init__ INFO] [topoaa] Sanitizing molecule 5a3i_chainA_rechainedasB.pdb
+[2024-06-01 23:10:53,994 __init__ INFO] [topoaa] Topology CNS input created in 5a3i_chainA_rechainedasB.inp
+[2024-06-01 23:10:53,995 __init__ INFO] [topoaa] Running CNS Jobs n=2
+[2024-06-01 23:10:53,995 libutil INFO] Selected 2 cores to process 2 jobs, with 8 maximum available cores.
+[2024-06-01 23:10:53,996 libparallel INFO] Using 2 cores
+[2024-06-01 23:11:01,074 libparallel INFO] >> completed 50% 
+[2024-06-01 23:11:01,075 libparallel INFO] >> completed 100% 
+[2024-06-01 23:11:01,075 libparallel INFO] 2 tasks finished
+[2024-06-01 23:11:01,075 __init__ INFO] [topoaa] CNS jobs have finished
+[2024-06-01 23:11:01,089 base_cns_module INFO] Module [topoaa] finished.
+[2024-06-01 23:11:01,090 __init__ INFO] [topoaa] took 7 seconds
+[2024-06-01 23:11:02,421 base_cns_module INFO] Running [rigidbody] module
+[2024-06-01 23:11:02,427 __init__ INFO] [rigidbody] crossdock=true
+[2024-06-01 23:11:02,427 __init__ INFO] [rigidbody] Preparing jobs...
+[2024-06-01 23:11:12,471 __init__ INFO] [rigidbody] Running CNS Jobs n=200
+[2024-06-01 23:11:12,471 libutil INFO] Selected 4 cores to process 200 jobs, with 8 maximum available cores.
+[2024-06-01 23:11:12,473 libparallel INFO] Using 4 cores
+[2024-06-02 00:07:49,700 libparallel INFO] >> completed 10% 
+[2024-06-02 00:07:49,711 libparallel INFO] >> completed 20% 
+[2024-06-02 00:08:28,889 libparallel INFO] >> completed 30% 
+[2024-06-02 00:08:28,890 libparallel INFO] >> completed 40% 
+[2024-06-02 00:08:28,891 libparallel INFO] >> completed 50% 
+[2024-06-02 00:08:28,892 libparallel INFO] >> completed 60% 
+[2024-06-02 00:08:28,894 libparallel INFO] >> completed 70% 
+[2024-06-02 00:08:56,586 libparallel INFO] >> completed 80% 
+[2024-06-02 00:08:56,587 libparallel INFO] >> completed 90% 
+[2024-06-02 00:08:56,588 libparallel INFO] >> completed 100% 
+[2024-06-02 00:08:56,588 libparallel INFO] 200 tasks finished
+[2024-06-02 00:08:56,590 __init__ INFO] [rigidbody] CNS jobs have finished
+[2024-06-02 00:09:00,562 base_cns_module INFO] Module [rigidbody] finished.
+[2024-06-02 00:09:00,563 __init__ INFO] [rigidbody] took 57 minutes and 58 seconds
+[2024-06-02 00:09:00,648 __init__ INFO] Running [seletop] module
+[2024-06-02 00:09:00,991 __init__ INFO] Module [seletop] finished.
+[2024-06-02 00:09:00,991 __init__ INFO] [seletop] took 0 seconds
+[2024-06-02 00:09:03,545 base_cns_module INFO] Running [flexref] module
+[2024-06-02 00:09:06,575 __init__ INFO] [flexref] Running CNS Jobs n=50
+[2024-06-02 00:09:06,576 libutil INFO] Selected 4 cores to process 50 jobs, with 8 maximum available cores.
+[2024-06-02 00:09:06,577 libparallel INFO] Using 4 cores
+[2024-06-02 01:39:38,361 libparallel INFO] >> completed 10% 
+[2024-06-02 01:39:38,365 libparallel INFO] >> completed 20% 
+[2024-06-02 01:40:14,680 libparallel INFO] >> completed 30% 
+[2024-06-02 01:40:14,680 libparallel INFO] >> completed 40% 
+[2024-06-02 01:40:14,681 libparallel INFO] >> completed 50% 
+[2024-06-02 01:41:25,989 libparallel INFO] >> completed 60% 
+[2024-06-02 01:41:25,990 libparallel INFO] >> completed 70% 
+[2024-06-02 01:41:25,990 libparallel INFO] >> completed 80% 
+[2024-06-02 01:41:25,991 libparallel INFO] >> completed 90% 
+[2024-06-02 01:41:25,991 libparallel INFO] >> completed 100% 
+[2024-06-02 01:41:25,992 libparallel INFO] 50 tasks finished
+[2024-06-02 01:41:25,993 __init__ INFO] [flexref] CNS jobs have finished
+[2024-06-02 01:41:26,967 base_cns_module INFO] Module [flexref] finished.
+[2024-06-02 01:41:26,968 __init__ INFO] [flexref] took 1h32m23s
+[2024-06-02 01:41:27,031 __init__ INFO] Running [seletop] module
+[2024-06-02 01:41:27,121 __init__ INFO] Module [seletop] finished.
+[2024-06-02 01:41:27,121 __init__ INFO] [seletop] took 0 seconds
+[2024-06-02 01:41:29,212 base_cns_module INFO] Running [mdref] module
+[2024-06-02 01:41:29,820 __init__ INFO] [mdref] Running CNS Jobs n=10
+[2024-06-02 01:41:29,821 libutil INFO] Selected 4 cores to process 10 jobs, with 8 maximum available cores.
+[2024-06-02 01:41:29,822 libparallel INFO] Using 4 cores
+[2024-06-02 02:16:46,584 libparallel INFO] >> completed 10% 
+[2024-06-02 02:16:46,586 libparallel INFO] >> completed 20% 
+[2024-06-02 02:16:46,587 libparallel INFO] >> completed 30% 
+[2024-06-02 02:17:38,779 libparallel INFO] >> completed 40% 
+[2024-06-02 02:17:38,779 libparallel INFO] >> completed 50% 
+[2024-06-02 02:17:38,780 libparallel INFO] >> completed 60% 
+[2024-06-02 02:18:00,438 libparallel INFO] >> completed 70% 
+[2024-06-02 02:18:00,439 libparallel INFO] >> completed 80% 
+[2024-06-02 02:18:00,439 libparallel INFO] >> completed 90% 
+[2024-06-02 02:18:00,440 libparallel INFO] >> completed 100% 
+[2024-06-02 02:18:00,440 libparallel INFO] 10 tasks finished
+[2024-06-02 02:18:00,441 __init__ INFO] [mdref] CNS jobs have finished
+[2024-06-02 02:18:00,669 base_cns_module INFO] Module [mdref] finished.
+[2024-06-02 02:18:00,670 __init__ INFO] [mdref] took 36 minutes and 31 seconds
+[2024-06-02 02:18:00,752 __init__ INFO] Running [caprieval] module
+[2024-06-02 02:18:00,754 __init__ INFO] [caprieval] No reference was given. Using the structure with the lowest score from previous step
+[2024-06-02 02:18:01,246 libutil INFO] Selected 4 cores to process 10 jobs, with 8 maximum available cores.
+[2024-06-02 02:18:01,247 libparallel INFO] Using 4 cores
+[2024-06-02 02:18:06,648 libparallel INFO] >> completed 10% 
+[2024-06-02 02:18:06,649 libparallel INFO] >> completed 20% 
+[2024-06-02 02:18:06,650 libparallel INFO] >> completed 30% 
+[2024-06-02 02:18:06,651 libparallel INFO] >> completed 40% 
+[2024-06-02 02:18:06,652 libparallel INFO] >> completed 50% 
+[2024-06-02 02:18:06,652 libparallel INFO] >> completed 60% 
+[2024-06-02 02:18:06,673 libparallel INFO] >> completed 70% 
+[2024-06-02 02:18:06,675 libparallel INFO] >> completed 80% 
+[2024-06-02 02:18:06,675 libparallel INFO] >> completed 90% 
+[2024-06-02 02:18:06,676 libparallel INFO] >> completed 100% 
+[2024-06-02 02:18:06,677 libparallel INFO] 10 tasks finished
+[2024-06-02 02:18:06,721 capri INFO] Rearranging output files into capri_ss.tsv
+[2024-06-02 02:18:06,783 capri INFO] Rearranging cluster information into capri_clt.tsv
+[2024-06-02 02:18:06,886 __init__ INFO] Module [caprieval] finished.
+[2024-06-02 02:18:06,886 __init__ INFO] [caprieval] took 6 seconds
+[2024-06-02 02:18:06,887 cli_analyse INFO] Running haddock3-analyse on ./, modules [6], with top_cluster = 10
+[2024-06-02 02:18:06,922 cli_analyse INFO] Created directory: /data/data/experiments/TEST_5A3I/output/analysis
+[2024-06-02 02:18:06,923 cli_analyse INFO] Reading input run directory
+[2024-06-02 02:18:06,938 cli_analyse INFO] selected steps: 6_caprieval
+[2024-06-02 02:18:06,940 cli_analyse INFO] Analysing step 6_caprieval
+[2024-06-02 02:18:06,943 cli_analyse INFO] step 6_caprieval is caprieval, files should be already available
+[2024-06-02 02:18:06,989 cli_analyse INFO] CAPRI files identified
+[2024-06-02 02:18:07,060 cli_analyse INFO] Plotting results..
+[2024-06-02 02:18:10,888 cli_analyse INFO] moving files to analysis folder
+[2024-06-02 02:18:10,902 cli_analyse INFO] updating paths in analysis/6_caprieval_analysis/capri_ss.tsv
+[2024-06-02 02:18:10,909 cli_analyse INFO] View the results in analysis/6_caprieval_analysis/report.html
+[2024-06-02 02:18:10,910 cli_analyse INFO] To view structures or download the structure files, in a terminal run the command `python -m http.server --directory /data/data/experiments/TEST_5A3I/output`. By default, http server runs on `http://0.0.0.0:8000/`. Open the link http://0.0.0.0:8000/analysis/6_caprieval_analysis/report.html in a web browser.
+[2024-06-02 02:18:10,911 cli_traceback INFO] Running haddock3-traceback on ./
+[2024-06-02 02:18:10,911 cli_traceback INFO] Reading input run directory
+[2024-06-02 02:18:10,922 cli_traceback INFO] All_steps: 0_topoaa, 1_rigidbody, 2_seletop, 3_flexref, 4_seletop, 5_mdref, 6_caprieval
+[2024-06-02 02:18:10,953 cli_traceback INFO] Modules not to be analysed: 0_topoaa, 2_seletop, 4_seletop, 6_caprieval
+[2024-06-02 02:18:10,953 cli_traceback INFO] Steps to trace back: 1_rigidbody, 3_flexref, 5_mdref
+[2024-06-02 02:18:10,957 cli_traceback INFO] Created directory: /data/data/experiments/TEST_5A3I/output/traceback
+[2024-06-02 02:18:10,957 cli_traceback INFO] Tracing back step 5_mdref
+[2024-06-02 02:18:10,968 cli_traceback INFO] Tracing back step 3_flexref
+[2024-06-02 02:18:10,992 cli_traceback INFO] Tracing back step 1_rigidbody
+[2024-06-02 02:18:11,056 cli_traceback INFO] Output dataframe traceback/traceback.tsv created with shape (200, 8)
+[2024-06-02 02:18:11,068 clean_steps INFO] Cleaning output for '0_topoaa' using 4 cores.
+[2024-06-02 02:18:11,380 libtimer INFO] cleaning output files took 0 seconds
+[2024-06-02 02:18:11,381 clean_steps INFO] Cleaning output for '1_rigidbody' using 4 cores.
+[2024-06-02 02:18:24,555 libtimer INFO] cleaning output files took 13 seconds
+[2024-06-02 02:18:24,556 clean_steps INFO] Cleaning output for '2_seletop' using 4 cores.
+[2024-06-02 02:18:24,615 libtimer INFO] cleaning output files took 0 seconds
+[2024-06-02 02:18:24,615 clean_steps INFO] Cleaning output for '3_flexref' using 4 cores.
+[2024-06-02 02:18:27,805 libtimer INFO] cleaning output files took 3 seconds
+[2024-06-02 02:18:27,806 clean_steps INFO] Cleaning output for '4_seletop' using 4 cores.
+[2024-06-02 02:18:27,879 libtimer INFO] cleaning output files took 0 seconds
+[2024-06-02 02:18:27,881 clean_steps INFO] Cleaning output for '5_mdref' using 4 cores.
+[2024-06-02 02:18:28,778 libtimer INFO] cleaning output files took 1 seconds
+[2024-06-02 02:18:28,778 clean_steps INFO] Cleaning output for '6_caprieval' using 4 cores.
+[2024-06-02 02:18:28,826 libtimer INFO] cleaning output files took 0 seconds
+[2024-06-02 02:18:28,827 cli INFO] This HADDOCK3 run took: 3h7m42s
+[2024-06-02 02:18:28,828 cli INFO] Finished at 02/06/2024 02:18:28. Adéu-siau! Até logo! Ciao!
