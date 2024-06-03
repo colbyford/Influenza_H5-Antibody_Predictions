@@ -1,0 +1,71 @@
+INFO:    Converting SIF file to temporary sandbox...
+WARNING: underlay of /etc/localtime required more than 50 (77) bind mounts
+WARNING: underlay of /usr/bin/nvidia-smi required more than 50 (388) bind mounts
+
+WARNING: You are welcome to use the default MSA server, however keep in mind that it's a
+limited shared resource only capable of processing a few thousand MSAs per day. Please
+submit jobs only from a single IP address. We reserve the right to limit access to the
+server case-by-case when usage exceeds fair use. If you require more MSAs: You can 
+precompute all MSAs with `colabfold_search` or host your own API and pass it to `--host-url`
+
+2024-05-31 13:43:17,058 Running colabfold 1.5.5
+2024-05-31 13:43:17,207 Unable to initialize backend 'rocm': NOT_FOUND: Could not find registered platform with name: "rocm". Available platform names are: CUDA Interpreter
+2024-05-31 13:43:17,208 Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+2024-05-31 13:43:18,792 Running on GPU
+2024-05-31 13:43:19,396 Found 6 citations for tools or databases
+2024-05-31 13:43:19,396 Query 1/1: 5DUP (length 449)
+  0%|          | 0/300 [elapsed: 00:00 remaining: ?]SUBMIT:   0%|          | 0/300 [elapsed: 00:00 remaining: ?]PENDING:   0%|          | 0/300 [elapsed: 00:00 remaining: ?]                                                             PENDING:   0%|          | 0/300 [elapsed: 00:00 remaining: ?]RUNNING:   0%|          | 0/300 [elapsed: 00:11 remaining: ?]RUNNING:   3%|▎         | 10/300 [elapsed: 00:11 remaining: 05:28]                                                                  RUNNING:   3%|▎         | 10/300 [elapsed: 00:11 remaining: 05:28]RUNNING:   3%|▎         | 10/300 [elapsed: 00:16 remaining: 05:28]RUNNING:   5%|▌         | 15/300 [elapsed: 00:16 remaining: 05:22]                                                                  RUNNING:   5%|▌         | 15/300 [elapsed: 00:16 remaining: 05:22]RUNNING:   5%|▌         | 15/300 [elapsed: 00:27 remaining: 05:22]RUNNING:   8%|▊         | 25/300 [elapsed: 00:27 remaining: 05:01]                                                                  RUNNING:   8%|▊         | 25/300 [elapsed: 00:27 remaining: 05:01]RUNNING:   8%|▊         | 25/300 [elapsed: 00:36 remaining: 05:01]RUNNING:  11%|█         | 33/300 [elapsed: 00:36 remaining: 04:51]                                                                  RUNNING:  11%|█         | 33/300 [elapsed: 00:36 remaining: 04:51]RUNNING:  11%|█         | 33/300 [elapsed: 00:43 remaining: 04:51]RUNNING:  13%|█▎        | 40/300 [elapsed: 00:43 remaining: 04:43]                                                                  RUNNING:  13%|█▎        | 40/300 [elapsed: 00:43 remaining: 04:43]RUNNING:  13%|█▎        | 40/300 [elapsed: 00:54 remaining: 04:43]RUNNING:  17%|█▋        | 50/300 [elapsed: 00:54 remaining: 04:30]                                                                  RUNNING:  17%|█▋        | 50/300 [elapsed: 00:54 remaining: 04:30]RUNNING:  17%|█▋        | 50/300 [elapsed: 01:04 remaining: 04:30]RUNNING:  20%|█▉        | 59/300 [elapsed: 01:04 remaining: 04:20]                                                                  RUNNING:  20%|█▉        | 59/300 [elapsed: 01:04 remaining: 04:20]RUNNING:  20%|█▉        | 59/300 [elapsed: 01:12 remaining: 04:20]RUNNING:  22%|██▏       | 67/300 [elapsed: 01:12 remaining: 04:11]                                                                  RUNNING:  22%|██▏       | 67/300 [elapsed: 01:12 remaining: 04:11]RUNNING:  22%|██▏       | 67/300 [elapsed: 01:20 remaining: 04:11]RUNNING:  25%|██▍       | 74/300 [elapsed: 01:20 remaining: 04:05]                                                                  RUNNING:  25%|██▍       | 74/300 [elapsed: 01:20 remaining: 04:05]RUNNING:  25%|██▍       | 74/300 [elapsed: 01:26 remaining: 04:05]RUNNING:  26%|██▋       | 79/300 [elapsed: 01:26 remaining: 04:02]                                                                  RUNNING:  26%|██▋       | 79/300 [elapsed: 01:26 remaining: 04:02]RUNNING:  26%|██▋       | 79/300 [elapsed: 01:31 remaining: 04:02]RUNNING:  28%|██▊       | 84/300 [elapsed: 01:31 remaining: 03:58]                                                                  RUNNING:  28%|██▊       | 84/300 [elapsed: 01:31 remaining: 03:58]COMPLETE:  28%|██▊       | 84/300 [elapsed: 01:40 remaining: 03:58]COMPLETE: 100%|██████████| 300/300 [elapsed: 01:40 remaining: 00:00]COMPLETE: 100%|██████████| 300/300 [elapsed: 01:42 remaining: 00:00]
+2024-05-31 13:43:20,058 Sleeping for 10s. Reason: PENDING
+2024-05-31 13:43:30,720 Sleeping for 5s. Reason: RUNNING
+2024-05-31 13:43:36,371 Sleeping for 10s. Reason: RUNNING
+2024-05-31 13:43:47,040 Sleeping for 8s. Reason: RUNNING
+2024-05-31 13:43:55,694 Sleeping for 7s. Reason: RUNNING
+2024-05-31 13:44:03,345 Sleeping for 10s. Reason: RUNNING
+2024-05-31 13:44:13,986 Sleeping for 9s. Reason: RUNNING
+2024-05-31 13:44:23,668 Sleeping for 8s. Reason: RUNNING
+2024-05-31 13:44:32,338 Sleeping for 7s. Reason: RUNNING
+2024-05-31 13:44:40,015 Sleeping for 5s. Reason: RUNNING
+2024-05-31 13:44:45,682 Sleeping for 5s. Reason: RUNNING
+2024-05-31 13:44:51,352 Sleeping for 8s. Reason: RUNNING
+  0%|          | 0/300 [elapsed: 00:00 remaining: ?]SUBMIT:   0%|          | 0/300 [elapsed: 00:00 remaining: ?]PENDING:   0%|          | 0/300 [elapsed: 00:00 remaining: ?]                                                             PENDING:   0%|          | 0/300 [elapsed: 00:00 remaining: ?]RUNNING:   0%|          | 0/300 [elapsed: 00:09 remaining: ?]RUNNING:   3%|▎         | 8/300 [elapsed: 00:09 remaining: 05:41]                                                                 RUNNING:   3%|▎         | 8/300 [elapsed: 00:09 remaining: 05:41]RUNNING:   3%|▎         | 8/300 [elapsed: 00:15 remaining: 05:41]RUNNING:   4%|▍         | 13/300 [elapsed: 00:15 remaining: 05:30]                                                                  RUNNING:   4%|▍         | 13/300 [elapsed: 00:15 remaining: 05:30]RUNNING:   4%|▍         | 13/300 [elapsed: 00:25 remaining: 05:30]RUNNING:   8%|▊         | 23/300 [elapsed: 00:25 remaining: 05:06]                                                                  RUNNING:   8%|▊         | 23/300 [elapsed: 00:25 remaining: 05:06]RUNNING:   8%|▊         | 23/300 [elapsed: 00:35 remaining: 05:06]RUNNING:  11%|█         | 32/300 [elapsed: 00:35 remaining: 04:52]                                                                  RUNNING:  11%|█         | 32/300 [elapsed: 00:35 remaining: 04:52]RUNNING:  11%|█         | 32/300 [elapsed: 00:42 remaining: 04:52]RUNNING:  13%|█▎        | 38/300 [elapsed: 00:42 remaining: 04:47]                                                                  RUNNING:  13%|█▎        | 38/300 [elapsed: 00:42 remaining: 04:47]COMPLETE:  13%|█▎        | 38/300 [elapsed: 00:47 remaining: 04:47]COMPLETE: 100%|██████████| 300/300 [elapsed: 00:47 remaining: 00:00]COMPLETE: 100%|██████████| 300/300 [elapsed: 00:49 remaining: 00:00]
+warning: Linking two modules of different target triples: 'LLVMDialectModule' is 'nvptx64-nvidia-gpulibs' whereas '' is 'nvptx64-nvidia-cuda'
+
+2024-05-31 13:45:03,055 Sleeping for 8s. Reason: PENDING
+2024-05-31 13:45:11,720 Sleeping for 5s. Reason: RUNNING
+2024-05-31 13:45:17,375 Sleeping for 10s. Reason: RUNNING
+2024-05-31 13:45:28,096 Sleeping for 9s. Reason: RUNNING
+2024-05-31 13:45:37,753 Sleeping for 6s. Reason: RUNNING
+2024-05-31 13:45:44,407 Sleeping for 5s. Reason: RUNNING
+2024-05-31 13:45:54,009 Setting max_seq=508, max_extra_seq=2048
+2024-05-31 13:46:59,076 alphafold2_multimer_v3_model_1_seed_000 recycle=0 pLDDT=91.4 pTM=0.855 ipTM=0.847
+2024-05-31 13:47:21,032 alphafold2_multimer_v3_model_1_seed_000 recycle=1 pLDDT=94.1 pTM=0.907 ipTM=0.909 tol=0.887
+2024-05-31 13:47:43,058 alphafold2_multimer_v3_model_1_seed_000 recycle=2 pLDDT=94.8 pTM=0.892 ipTM=0.893 tol=0.623
+2024-05-31 13:48:05,193 alphafold2_multimer_v3_model_1_seed_000 recycle=3 pLDDT=95.4 pTM=0.907 ipTM=0.906 tol=0.216
+2024-05-31 13:48:05,194 alphafold2_multimer_v3_model_1_seed_000 took 116.1s (3 recycles)
+2024-05-31 13:48:27,537 alphafold2_multimer_v3_model_2_seed_000 recycle=0 pLDDT=91.2 pTM=0.85 ipTM=0.84
+2024-05-31 13:48:49,756 alphafold2_multimer_v3_model_2_seed_000 recycle=1 pLDDT=93.5 pTM=0.875 ipTM=0.884 tol=0.971
+2024-05-31 13:49:12,011 alphafold2_multimer_v3_model_2_seed_000 recycle=2 pLDDT=93.6 pTM=0.854 ipTM=0.862 tol=0.209
+2024-05-31 13:49:12,012 alphafold2_multimer_v3_model_2_seed_000 took 66.6s (2 recycles)
+2024-05-31 13:49:34,501 alphafold2_multimer_v3_model_3_seed_000 recycle=0 pLDDT=91.5 pTM=0.87 ipTM=0.865
+2024-05-31 13:49:56,867 alphafold2_multimer_v3_model_3_seed_000 recycle=1 pLDDT=93.6 pTM=0.908 ipTM=0.912 tol=0.721
+2024-05-31 13:50:19,197 alphafold2_multimer_v3_model_3_seed_000 recycle=2 pLDDT=94.1 pTM=0.896 ipTM=0.896 tol=0.469
+2024-05-31 13:50:19,198 alphafold2_multimer_v3_model_3_seed_000 took 67.0s (2 recycles)
+2024-05-31 13:50:41,716 alphafold2_multimer_v3_model_4_seed_000 recycle=0 pLDDT=91.9 pTM=0.881 ipTM=0.875
+2024-05-31 13:51:04,139 alphafold2_multimer_v3_model_4_seed_000 recycle=1 pLDDT=94.2 pTM=0.913 ipTM=0.916 tol=0.602
+2024-05-31 13:51:26,507 alphafold2_multimer_v3_model_4_seed_000 recycle=2 pLDDT=94.6 pTM=0.903 ipTM=0.904 tol=0.633
+2024-05-31 13:51:48,879 alphafold2_multimer_v3_model_4_seed_000 recycle=3 pLDDT=95.1 pTM=0.906 ipTM=0.905 tol=0.0986
+2024-05-31 13:51:48,880 alphafold2_multimer_v3_model_4_seed_000 took 89.5s (3 recycles)
+2024-05-31 13:52:11,386 alphafold2_multimer_v3_model_5_seed_000 recycle=0 pLDDT=91.4 pTM=0.872 ipTM=0.867
+2024-05-31 13:52:33,782 alphafold2_multimer_v3_model_5_seed_000 recycle=1 pLDDT=93.8 pTM=0.907 ipTM=0.907 tol=0.696
+2024-05-31 13:52:56,137 alphafold2_multimer_v3_model_5_seed_000 recycle=2 pLDDT=94.4 pTM=0.893 ipTM=0.889 tol=0.584
+2024-05-31 13:53:18,495 alphafold2_multimer_v3_model_5_seed_000 recycle=3 pLDDT=95.1 pTM=0.903 ipTM=0.896 tol=0.234
+2024-05-31 13:53:18,496 alphafold2_multimer_v3_model_5_seed_000 took 89.4s (3 recycles)
+2024-05-31 13:53:18,670 reranking models by 'multimer' metric
+2024-05-31 13:53:33,001 Relaxation took 14.3s
+2024-05-31 13:53:33,001 rank_001_alphafold2_multimer_v3_model_1_seed_000 pLDDT=95.4 pTM=0.907 ipTM=0.906
+2024-05-31 13:53:33,003 rank_002_alphafold2_multimer_v3_model_4_seed_000 pLDDT=95.1 pTM=0.906 ipTM=0.905
+2024-05-31 13:53:33,004 rank_003_alphafold2_multimer_v3_model_5_seed_000 pLDDT=95.1 pTM=0.903 ipTM=0.896
+2024-05-31 13:53:33,005 rank_004_alphafold2_multimer_v3_model_3_seed_000 pLDDT=94.1 pTM=0.896 ipTM=0.896
+2024-05-31 13:53:33,006 rank_005_alphafold2_multimer_v3_model_2_seed_000 pLDDT=93.6 pTM=0.854 ipTM=0.862
+2024-05-31 13:53:34,237 Done
+INFO:    Cleaning up image...
