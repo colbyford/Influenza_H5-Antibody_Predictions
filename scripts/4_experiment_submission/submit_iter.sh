@@ -11,4 +11,4 @@ module load singularity
 export SINGULARITY_CONTAINER_HOME=$(pwd)
 
 cd ../../data/experiments/$1
-singularity exec $SINGULARITY_CONTAINER_HOME/haddock3.sif haddock3 config.cfg
+singularity exec $SINGULARITY_CONTAINER_HOME/haddock3.sif "haddock3 config.cfg"
