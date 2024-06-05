@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=cford_h5_${1}
-#SBATCH --partition=Orion
+#SBATCH --partition=Nebula
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=36
 ##SBATCH --constraint=skylake
