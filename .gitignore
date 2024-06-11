@@ -162,26 +162,26 @@ cython_debug/
 
 
 ## HADDOCK 3 unnecesary files
-data/experiments/*/output/data/*
-data/experiments/*/output/00_topoaa/*
-data/experiments/*/output/01_rigidbody/*
-data/experiments/*/output/02_clustfcc/*
-data/experiments/*/output/03_seletopclusts/*
-data/experiments/*/output/04_flexref/*
-data/experiments/*/output/05_clustfcc/*
-data/experiments/*/output/06_seletopclusts/*
-# data/experiments/*/output/07_mdref/*
-data/experiments/*/output/07_mdref/*.inp
-data/experiments/*/output/07_mdref/*.out.gz
-data/experiments/*/output/07_mdref/*.seed
-data/experiments/*/output/07_mdref/io.json
-data/experiments/*/output/07_mdref/params.cfg
-# data/experiments/*/output/08_mdscoring/*
-data/experiments/*/output/08_mdscoring/*.inp
-data/experiments/*/output/08_mdscoring/*.out.gz
-data/experiments/*/output/08_mdscoring/io.json
-data/experiments/*/output/08_mdscoring/params.cfg
-# data/experiments/*/output/09_clustfcc/*
-data/experiments/*/output/09_clustfcc/cluster.out
-data/experiments/*/output/09_clustfcc/io.json
-data/experiments/*/output/09_clustfcc/params.cfg
+data/*/*/output/data/*
+data/*/*/output/00_topoaa/*
+data/*/*/output/01_rigidbody/*
+data/*/*/output/02_clustfcc/*
+data/*/*/output/03_seletopclusts/*
+data/*/*/output/04_flexref/*
+data/*/*/output/05_clustfcc/*
+data/*/*/output/06_seletopclusts/*
+# data/*/*/output/07_mdref/*
+data/*/*/output/07_mdref/*.inp
+data/*/*/output/07_mdref/*.out.gz
+data/*/*/output/07_mdref/*.seed
+data/*/*/output/07_mdref/io.json
+data/*/*/output/07_mdref/params.cfg
+# data/*/*/output/08_mdscoring/*
+data/*/*/output/08_mdscoring/*.inp
+data/*/*/output/08_mdscoring/*.out.gz
+data/*/*/output/08_mdscoring/io.json
+data/*/*/output/08_mdscoring/params.cfg
+# data/*/*/output/09_clustfcc/*
+data/*/*/output/09_clustfcc/cluster.out
+data/*/*/output/09_clustfcc/io.json
+data/*/*/output/09_clustfcc/params.cfg
