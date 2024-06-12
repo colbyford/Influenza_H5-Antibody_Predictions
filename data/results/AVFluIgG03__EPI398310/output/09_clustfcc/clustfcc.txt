@@ -1,0 +1,33 @@
+### clustfcc output ###
+
+Clustering parameters 
+> contact_distance_cutoff=5.0A
+> fraction_cutoff=0.6
+> threshold=4
+> strictness=0.75
+
+Note: Models marked with * represent the center of the cluster
+-----------------------------------------------
+
+Total # of clusters: 2
+
+-----------------------------------------------
+Cluster 1 (#1, n=6, top4_avg_score = -154.29 +-7.43)
+
+clt_rank	model_name	score
+1	mdscoring_4.pdb	-165.41
+2	mdscoring_10.pdb	-156.67	*
+3	mdscoring_7.pdb	-147.88
+4	mdscoring_8.pdb	-147.20
+5	mdscoring_9.pdb	-146.95
+6	mdscoring_5.pdb	-141.03
+
+-----------------------------------------------
+Cluster 2 (#2, n=4, top4_avg_score = -129.55 +-2.47)
+
+clt_rank	model_name	score
+1	mdscoring_6.pdb	-132.22	*
+2	mdscoring_1.pdb	-131.37
+3	mdscoring_3.pdb	-128.74
+4	mdscoring_2.pdb	-125.90
+-----------------------------------------------
