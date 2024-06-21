@@ -1,0 +1,53 @@
+# Make Statistics and Figures
+
+```{r}
+library(dplyr)
+library(readxl)
+library(ggplot2)
+library(ggpubr)
+```
+
+
+
+## Load in Data
+
+```{r}
+experiments <- read_excel("../../Experiments.xlsx", sheet = "Experiments")
+antibodies <- read_excel("../../Experiments.xlsx", sheet = "Antibodies")
+antigens <- read_excel("../../Experiments.xlsx", sheet = "Antigens")
+
+
+data <- experiments %>% 
+  left_join(antibodies, by="antibody_id") %>% 
+  left_join(antigens, by="antigen_id")
+```
+
+
+## Create Boxplots
+
+```{r}
+## Create Boxplots of metrics by Fv type
+plot_comparisons <- combn(unique(data$antibody_id), 2, simplify = FALSE)
+# pymol_palette <- c("#4D4DFF","#1A9999")
+```
+
+
+### VDW Energy
+```{r}
+vdw_boxplot <- ggboxplot(data,
+                         x = "antibody_id",
+                         y = "vdw_mean",
+                         xlab = "",
+                         ylab = "van der Waals Energy",
+                         color = "antibody_id",
+                         # palette = pymol_palette,
+                         add = "dotplot") + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        legend.title=element_blank()) +
+  stat_compare_means(method = "wilcox.test",
+                     comparisons = plot_comparisons)
+
+vdw_boxplot
+```
