@@ -1,10 +1,18 @@
 # Make Statistics and Figures
 
 ```{r}
+## Tidyverse Stuff
 library(dplyr)
+library(tidyr)
+library(forcats)
 library(readxl)
+
+## Plotting Libraries
 library(ggplot2)
 library(ggpubr)
+library(ggExtra)
+library(ggdendroplot)
+library(ggsci)
 ```
 
 ## Load in Data
@@ -20,17 +28,36 @@ data <- experiments %>%
   left_join(antigens, by="antigen_id")
 ```
 
+## Define UNCC Color Palette
+```{r}
+uncc_colors <- c(
+  ## All in C colors
+  "#005035", ## Charlotte Green
+  "#A49665", ## Niner Gold
+  "#F1E6B2", ## Jasper
+  "#899064", ## Pine Green
+  "#802F2D", ## Clay Red
+  "#007377",  ## Sky Blue
+  
+  ## Others
+  "#717C7D", ## 444C (Grey)
+  "#72246C", ## 255C (Purple)
+  "#006BA6", ## 307C (Blue)
+  "#DF4661", ## 198C
+  "#FFB81C", ## 1235C
+  "#696158"  ## 405C
+  
+)
+```
+
 ## Create Boxplots
+
+### Setup Comparisons to Perform
 
 ```{r}
 ## Create Boxplots of metrics by Fv type
 plot_comparisons <- combn(unique(data$antibody_id), 2, simplify = FALSE)
-# pymol_palette <- c("#4D4DFF","#1A9999")
-```
 
-### VDW Energy
-
-```{r}
 ## perform wilcox test on plot_comparisons
 wilcox_results <- lapply(plot_comparisons, function(x) {
   wilcox.test(data %>% 
@@ -45,80 +72,225 @@ sig_plot_comparisons <- plot_comparisons[sapply(wilcox_results,
                                                 function(x) x$p.value < 0.05)]
 ```
 
+### General Plot Function
+
 ```{r}
-## Violin plot of VDW energy by antibody only showing significant comparisons
-
-vdw_violin <- ggviolin(data,
-                       x = "antibody_id",
-                       y = "vdw_mean",
-                       xlab = "Antibody",
-                       ylab = "Mean van der Waals Energy",
-                       color = "antibody_id",
-                       # palette = pymol_palette,
-                       add = "boxplot") + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        legend.title=element_blank()) +
-  stat_compare_means(method = "wilcox.test",
-                     hide.ns = TRUE,
-                     comparisons = sig_plot_comparisons)
-
-
-vdw_violin
+make_h5_boxplot_by_antibody <- function(y, y_lab){
+  plot <- ggplot(data, 
+                 aes_string(
+                   x = "antibody_id",
+                   y = y,
+                   fill = "antibody_id"
+                 )) + 
+    geom_violin() +
+    geom_boxplot(width=0.25, fill = "white", color = "black", outlier.size = 2, notch = TRUE) +
+    stat_compare_means() +
+    labs(y = y_lab,
+         x = 'Antibody',
+         color = "Antibody") +
+    scale_fill_manual(values = uncc_colors) +
+    theme_linedraw() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+          line = element_line(colour = "grey"),
+          axis.line = element_line(color = "grey"),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(color = "grey"),
+          legend.position = "none"
+    )
+  
+  return(plot)
+}
 ```
 
 ```{r}
-vdw_boxplot <- ggboxplot(data,
-                         x = "antibody_id",
-                         y = "vdw_mean",
-                         xlab = "Antibody",
-                         ylab = "Mean van der Waals Energy",
-                         color = "antibody_id",
-                         # palette = pymol_palette,
-                         add = "dotplot") + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        legend.title=element_blank()) +
-  stat_compare_means(method = "wilcox.test",
-                     hide.ns = TRUE,
-                     comparisons = sig_plot_comparisons)
+## van der Waals Energy
+boxplot_vdw_by_antibody <- make_h5_boxplot_by_antibody(y = "vdw_mean", y_lab = "Mean van der Waals Energy" )
 
-vdw_boxplot
+## Electrostatic Energy
+boxplot_elec_by_antibody <- make_h5_boxplot_by_antibody(y = "elec_mean", y_lab = "Mean Electrostatic Energy")
+
+## Desolvation Energy
+boxplot_desolv_by_antibody <- make_h5_boxplot_by_antibody(y = "desolv_mean", y_lab = "Mean Desolvation Energy")
+
+## Buried Surface Area
+boxplot_bsa_by_antibody <- make_h5_boxplot_by_antibody(y = "bsa_mean", y_lab = "Mean Buried Surface Area")
+
+## HADDOCK Score
+boxplot_haddock_by_antibody <- make_h5_boxplot_by_antibody(y = "haddock_score_mean", y_lab = "Mean HADDOCK Score")
+
+## Total Score
+boxplot_total_by_antibody <- make_h5_boxplot_by_antibody(y = "total_mean", y_lab = "Mean Total Energy")
 ```
+
+
+## Place on single plot
+
+```{r}
+boxplots_by_antibody_grid = ggarrange(boxplot_vdw_by_antibody,
+                                 boxplot_elec_by_antibody,
+                                 boxplot_desolv_by_antibody,
+                                 boxplot_bsa_by_antibody,
+                                 boxplot_haddock_by_antibody,
+                                 boxplot_total_by_antibody,
+                                 labels = c("A.", "B.", "C.", "D.", "E.", "F."),
+                                 ncol = 2, nrow = 3)
+
+# boxplots_by_antibody_grid
+```
+
+```{r}
+ggsave("../../figures/boxplots_by_antibody_grid.pdf", width = 16.5, height = 12.75, units = "in")
+```
+
+
+## Heatmaps
+
+### VDW Energy
+
+#### Build Clusters
+
+```{r}
+## Source: https://github.com/NicolasH2/ggdendroplot
+
+## Make pivoted data.frame by antigen/antibody for VDW energy
+data_vdw_pivot <- data %>% 
+  select(antigen_id, antibody_id, vdw_mean) %>% 
+  pivot_wider(names_from = antibody_id, values_from = vdw_mean)
+
+data_vdw_pivot_mat <- data_vdw_pivot %>% select(-antigen_id)%>% as.matrix()
+rownames(data_vdw_pivot_mat) <- data_vdw_pivot$antigen_id
+colnames(data_vdw_pivot_mat) <- colnames(data_vdw_pivot)[-1]
+
+## Perform hierarchical clustering
+rowclus <- hclust(dist( data_vdw_pivot_mat ))    #cluster the rows
+colclus <- hclust(dist( t(data_vdw_pivot_mat) )) #cluster the columns
+
+# bring the data.frame into a from easily usable by ggplot
+hm <- hmReady(data_vdw_pivot_mat, colclus=colclus, rowclus=rowclus)
+```
+
+#### Render Cluster Plot
+
+```{r}
+# plot the heatmap
+hmplot <- ggplot() + 
+  geom_tile(data=hm, aes(x=x, y=y, fill=value)) +
+  # scale_fill_gradientn(colors=hmGradient()) + 
+  scale_fill_distiller(palette = "Spectral", direction = -1) +
+  geom_dendro(colclus, ylim=c(165, 167)) +
+  geom_dendro(rowclus, xlim=c(11.5, 13), pointing="side") +
+  labs(y = "Antigen",
+       x = 'Antibody',
+       fill = "Mean\nvan der Waals\nEnergy") +
+  theme_hm() +
+  theme(axis.title=element_blank(),
+        axis.text.y = element_text(size=5),
+        legend.title = element_text(size=8),
+        legend.text = element_text(size=8),
+        legend.position = c(0.65, 0.95),
+        legend.direction = "horizontal"
+        # legend.position = "none"
+        )
+  
+  
+print(hmplot)
+```
+
+```{r}
+ggsave("../../figures/dendro_vdw_grid.pdf", width = 5.5, height = 11, units = "in")
+```
+
 
 ## Scatterplots
 
-### VDW by Year
+### General Plot Function
 
 ```{r}
-scatter_vdw_by_year <- ggplot(data %>% 
-                                filter(antigen_collection_year >= 2000),
-                              aes(
-                                x = antigen_collection_year,
-                                y = vdw_mean,
-                                group = antibody_id,
-                                color = antigen_host_order
-                              )
-) + 
-  geom_point() +
-  geom_smooth(method = lm,
-              se = TRUE,
-              col='grey',
-              linewidth=0.7) +
-  stat_cor(method = "spearman",
-           # aes(color = antigen_host_order),
-           label.x = 2000,
-           label.y = max(data$vdw_mean) - 50
-  ) +
-  facet_wrap(~ antibody_id, ncol = 3) +
-  labs(y='Mean van der Waals Energy',
-       x='Collection Year',
-       color = "Antibody") +
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        legend.position = "none")
+make_h5_scatter_by_order <- function(y, y_lab){
+  
+  plot <- ggplot(data %>% filter(#antigen_collection_year >= 2000,
+                                 antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+  ),
+  aes_string(
+    x = "antigen_collection_year",
+    y = y,
+    group = "antigen_host_order",
+    color = "antigen_host_order",
+    alpha = 0.35
+  )) + 
+    geom_point() +
+    geom_smooth(method = lm,
+                se = TRUE,
+                col='black',
+                linetype="dashed",
+                linewidth=1,
+                # fullrange=TRUE
+    ) +
+    stat_cor(method = "spearman",
+             color = "black",
+             label.x = 2000,
+             label.y = min(data[[y]])
+    ) +
+    # xlim(2000, 2024) + 
+    scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
+    scale_color_manual(values = c("#005035", "#A49665", "#802F2D")) + ## UNCC Colors
+    facet_wrap(~ antigen_host_order, ncol = 3) +
+    labs(y = y_lab,
+         x = 'Collection Year',
+         color = "Host Order") +
+    theme_linedraw() +
+    # theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+          line = element_line(colour = "grey"),
+          axis.line = element_line(color = "grey"),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(color = "grey"),
+          legend.position = "none"
+    )
+  
+  return(plot)
+}
 
-scatter_vdw_by_year
+```
+
+### Make Individual Score Plots
+
+```{r}
+## van der Waals Energy
+scatter_vdw_by_year <- make_h5_scatter_by_order(y = "vdw_mean", y_lab = "Mean van der Waals Energy" )
+
+## Electrostatic Energy
+scatter_elec_by_year <- make_h5_scatter_by_order(y = "elec_mean", y_lab = "Mean Electrostatic Energy")
+
+## Desolvation Energy
+scatter_desolv_by_year <- make_h5_scatter_by_order(y = "desolv_mean", y_lab = "Mean Desolvation Energy")
+
+## Buried Surface Area
+scatter_bsa_by_year <- make_h5_scatter_by_order(y = "bsa_mean", y_lab = "Mean Buried Surface Area")
+
+## HADDOCK Score
+scatter_haddock_by_year <- make_h5_scatter_by_order(y = "haddock_score_mean", y_lab = "Mean HADDOCK Score")
+
+## Total Score
+scatter_total_by_year <- make_h5_scatter_by_order(y = "total_mean", y_lab = "Mean Total Energy")
+```
+
+## Place on single plot
+
+```{r}
+scatter_by_year_grid = ggarrange(scatter_vdw_by_year,
+                                 scatter_elec_by_year,
+                                 scatter_desolv_by_year,
+                                 scatter_bsa_by_year,
+                                 scatter_haddock_by_year,
+                                 scatter_total_by_year,
+                                 labels = c("A.", "B.", "C.", "D.", "E.", "F."),
+                                 ncol = 2, nrow = 3)
+
+# scatter_by_year_grid
+```
+
+
+```{r}
+ggsave("../../figures/scatter_by_year_grid.pdf", width = 11, height = 8.5, units = "in")
 ```
