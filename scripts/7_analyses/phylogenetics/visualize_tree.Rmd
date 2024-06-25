@@ -1,0 +1,79 @@
+# Visualize Phylogenetic Tree with Metadata
+
+```{r}
+library(ggtree)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(stringr)
+```
+
+## Load Data
+
+```{r}
+tree <- read.tree("JvaIzS9gqgXQKsGwvbFZQQ_newick.txt")
+
+gisaid_metadata <- read_excel("../../../Experiments.xlsx", sheet = "Full List Antigens")
+clusters <- read_excel("../../../Experiments.xlsx", sheet = "Clusters")
+
+```
+
+
+## Remedy Tip Labels
+
+```{r}
+tip_labels <- data.frame(label = tree$tip.label) %>% 
+  separate(label, c("antigen_id"), sep = "_", extra = "drop")
+
+tree$tip.label <- tip_labels$antigen_id
+```
+
+
+## Make metadata
+
+```{r}
+metadata <- gisaid_metadata %>%
+  left_join(clusters, by = "antigen_id") %>% 
+  filter(antigen_id %in% tip_labels$antigen_id)
+```
+
+## Append Metadata
+
+```{r}
+tip_meta <- tip_labels %>%
+  left_join(metadata, by = "antigen_id")
+
+tree_df <- data.frame(node = 1:length(tree$tip.label),
+                      tip_label = tree$tip.label) %>% 
+  left_join(metadata, by = c("tip_label" = "antigen_id"))
+
+tree$antigen_host_order <- tree_df$antigen_host_order 
+```
+
+
+## Visualize the Tree
+
+```{r}
+base_tree_plot <- ggtree(tree,
+                         layout="circular", 
+                         # ladderize = FALSE, 
+                         # branch.length = "none"
+                         continuous = 'colour',
+                         size=2
+                         ) %<+% 
+    tip_meta +
+  # geom_text(aes(label=node), hjust=.3) +
+  scale_color_gradientn(colours=c("red", 'orange', 'green', 'cyan', 'blue')) +
+  geom_tippoint(aes(color=antigen_host_order,
+                    shape=representative_sequence)) +
+  coord_flip() +
+  scale_x_reverse() #+
+  # theme(color = "Host Order"
+  #       shape = "Representative Sequence")
+  # geom_tiplab(hjust = -.1)
+  # theme(legend.position = "none")
+
+
+base_tree_plot
+```
+
