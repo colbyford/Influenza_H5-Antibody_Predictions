@@ -13,6 +13,8 @@ library(ggpubr)
 library(ggExtra)
 library(ggdendroplot)
 library(ggsci)
+
+alpha = 0.05
 ```
 
 ## Load in Data
@@ -22,10 +24,13 @@ experiments <- read_excel("../../Experiments.xlsx", sheet = "Experiments")
 antibodies <- read_excel("../../Experiments.xlsx", sheet = "Antibodies")
 antigens <- read_excel("../../Experiments.xlsx", sheet = "Antigens")
 
+## Exclude lab-derived isolates
+exclusions <- c("EPI243001", "EPI287236", "EPI359214")
 
 data <- experiments %>% 
   left_join(antibodies, by="antibody_id") %>% 
-  left_join(antigens, by="antigen_id")
+  left_join(antigens, by="antigen_id") %>% 
+  filter(!antigen_id %in% exclusions)
 ```
 
 ## Define UNCC Color Palette
@@ -52,7 +57,9 @@ uncc_colors <- c(
 
 ## Create Boxplots
 
-### Setup Comparisons to Perform
+### Antibody Performance
+
+#### Setup Comparisons to Perform
 
 ```{r}
 ## Create Boxplots of metrics by Fv type
@@ -69,10 +76,10 @@ wilcox_results <- lapply(plot_comparisons, function(x) {
 
 ## Filter to significant
 sig_plot_comparisons <- plot_comparisons[sapply(wilcox_results,
-                                                function(x) x$p.value < 0.05)]
+                                                function(x) x$p.value < alpha)]
 ```
 
-### General Plot Function
+#### General Plot Function
 
 ```{r}
 make_h5_boxplot_by_antibody <- function(y, y_lab){
@@ -122,8 +129,7 @@ boxplot_haddock_by_antibody <- make_h5_boxplot_by_antibody(y = "haddock_score_me
 boxplot_total_by_antibody <- make_h5_boxplot_by_antibody(y = "total_mean", y_lab = "Mean Total Energy")
 ```
 
-
-## Place on single plot
+#### Place on single plot
 
 ```{r}
 boxplots_by_antibody_grid = ggarrange(boxplot_vdw_by_antibody,
@@ -142,6 +148,108 @@ boxplots_by_antibody_grid = ggarrange(boxplot_vdw_by_antibody,
 ggsave("../../figures/boxplots_by_antibody_grid.pdf", width = 16.5, height = 12.75, units = "in")
 ```
 
+
+### Comparisons with Mutations
+
+
+```{r}
+make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
+  
+  ## Get mutations and put ref_aa first
+  mutations <- unique(data[[x]])
+  mutations <- c(ref_aa, mutations[!mutations %in% ref_aa])
+  
+  ## Create Boxplots of metrics by Fv type
+  mut_plot_comparisons <- combn(mutations, 2, simplify = FALSE)
+
+  ## Perform wilcox test on comparisons
+  mut_wilcox_results <- lapply(mut_plot_comparisons, function(z) {
+    wilcox.test(data %>% 
+                  filter(.data[[x]] %in% z) %>% 
+                  pull(.data[[y]]) ~ data %>% 
+                  filter(.data[[x]] %in% z) %>% 
+                  pull(.data[[x]]))
+  })
+  
+  ## Filter to significant
+  sig_mut_plot_comparisons <- mut_plot_comparisons[sapply(mut_wilcox_results,
+                                                  function(x) x$p.value < alpha)] 
+  
+  ## Reorder x column in data using mutations
+  plot <- ggplot(data %>% 
+                   mutate(!!x := fct_relevel(.data[[x]], mutations),
+                          is_ref = .data[[x]] == ref_aa), 
+                   aes_string(
+                     ## reorder to put "N" first
+                     x = x,
+                     y = y,
+                     fill = "is_ref"
+                   )) + 
+      geom_violin() +
+      geom_boxplot(width=0.25, fill = "white", color = "black", outlier.size = 2, notch = FALSE) +
+      stat_compare_means(method = "wilcox.test", comparisons = sig_mut_plot_comparisons) +
+      labs(y = y_lab,
+           x = x_lab,
+           color = "Antibody") +
+      scale_fill_manual(values = uncc_colors) +
+      theme_linedraw() +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+            line = element_line(colour = "grey"),
+            axis.line = element_line(color = "grey"),
+            panel.grid.minor = element_blank(),
+            panel.grid.major = element_line(color = "grey"),
+            legend.position = "none"
+      )
+
+  return(plot)
+}
+```
+
+```{r}
+y = "vdw_mean"
+y_lab = "Mean van der Waals Energy"
+
+x = "aa_4jug_pos_224"
+x_lab = "N224 Mutation"
+
+make_mutation_boxplot(x, y, x_lab, y_lab, ref_aa = "N")
+```
+
+```{r}
+metrics_cols <- list(c("Mean van der Waals Energy", "vdw_mean"),
+                     c("Mean Electrostatic Energy", "elec_mean"),
+                     c("Mean Desolvation Energy", "desolv_mean"),
+                     c("Mean Buried Surface Area"= "bsa_mean"),
+                     c("Mean HADDOCK Score", "haddock_score_mean"),
+                     c("Mean Total Score", "total_mean"))
+
+mutations_cols <- list(c("N158 Mutation", "aa_4jug_pos_158"),
+                      c("T160 Mutation", "aa_4jug_pos_160"),
+                      c("E190 Mutation", "aa_4jug_pos_190"),
+                      c("N224 Mutation", "aa_4jug_pos_224"),
+                      c("G225 Mutation", "aa_4jug_pos_225"),
+                      c("Q226 Mutation", "aa_4jug_pos_226"),
+                      c("G228 Mutation", "aa_4jug_pos_228"))
+
+mutation_plots <- list()
+## Make plot for each combination
+for (metric in metrics_cols){
+  for (mut in mutations_cols){
+    # print(metric)
+    # print(mut)
+    x = metric[2]
+    x_lab = metric[1]
+    y = mut[2]
+    y_lab = mut[1]
+    ref_aa = substr(y_lab,1,1)
+    plot <- make_mutation_boxplot(x, y, x_lab, y_lab, ref_aa)
+    mutation_plots[[paste0(x, "_", y)]] <- plot
+  }
+}
+
+# mutation_plots_grid <- ggarrange(plotlist = mutation_plots, ncol = 6)
+# mutation_plots_grid
+```
 
 ## Heatmaps
 
@@ -199,6 +307,7 @@ print(hmplot)
 ```{r}
 ggsave("../../figures/dendro_vdw_grid.pdf", width = 5.5, height = 11, units = "in")
 ```
+
 
 
 ## Scatterplots
@@ -275,7 +384,7 @@ scatter_haddock_by_year <- make_h5_scatter_by_order(y = "haddock_score_mean", y_
 scatter_total_by_year <- make_h5_scatter_by_order(y = "total_mean", y_lab = "Mean Total Energy")
 ```
 
-## Place on single plot
+### Place on single plot
 
 ```{r}
 scatter_by_year_grid = ggarrange(scatter_vdw_by_year,
@@ -287,10 +396,48 @@ scatter_by_year_grid = ggarrange(scatter_vdw_by_year,
                                  labels = c("A.", "B.", "C.", "D.", "E.", "F."),
                                  ncol = 2, nrow = 3)
 
-# scatter_by_year_grid
+scatter_by_year_grid
 ```
 
 
 ```{r}
 ggsave("../../figures/scatter_by_year_grid.pdf", width = 11, height = 8.5, units = "in")
+```
+
+
+## Make General Statistics about Full Antigen Metadata
+
+## Load in Data
+```{r}
+full_antigen_metadata <- read_excel("../../Experiments.xlsx", sheet = "Full Antigen Metadata")
+
+## Filter out lab-derived isolates
+full_antigen_metadata_filtered <- full_antigen_metadata %>% 
+  filter(!antigen_host_name %in% c("Laboratory derived"))
+```
+
+
+## Make Treemap by Country
+
+```{r}
+library(treemapify)
+
+full_antigen_metadata_filtered_country_summary <- full_antigen_metadata_filtered %>% 
+  select(antigen_collection_location_continent, antigen_collection_location_country) %>%
+  add_count(antigen_collection_location_continent, antigen_collection_location_country, name = "isolate_count") %>% 
+  unique()
+
+
+ggplot(full_antigen_metadata_filtered_country_summary,
+       aes(area = isolate_count,
+           fill = antigen_collection_location_country,
+           label = antigen_collection_location_country,
+           subgroup = antigen_collection_location_continent
+           )) +
+  geom_treemap() +
+  geom_treemap_subgroup_border() +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                             "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T)
+
 ```
