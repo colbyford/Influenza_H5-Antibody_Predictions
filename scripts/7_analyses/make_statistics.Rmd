@@ -153,14 +153,6 @@ ggsave("../../figures/boxplots_by_antibody_grid.pdf", width = 16.5, height = 12.
 
 
 ```{r}
-wilcox.test(data %>% 
-                  filter(.data[[x]] %in% z) %>% 
-                  pull(.data[[y]]) ~ data %>% 
-                  filter(.data[[x]] %in% z) %>% 
-                  pull(.data[[x]]))
-```
-
-```{r}
 make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
   
   ## Get mutations and put ref_aa first
@@ -188,17 +180,19 @@ make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
                    mutate(!!x := fct_relevel(.data[[x]], mutations),
                           is_ref = .data[[x]] == ref_aa), 
                    aes_string(
-                     ## reorder to put "N" first
                      x = x,
                      y = y,
                      fill = "is_ref"
                    )) + 
       geom_violin() +
       geom_boxplot(width=0.25, fill = "white", color = "black", outlier.size = 2, notch = FALSE) +
+      ## Add significant Wilcox values
       stat_compare_means(method = "wilcox.test", comparisons = sig_mut_plot_comparisons) +
       labs(y = y_lab,
            x = x_lab,
-           color = "Antibody") +
+           color = "Mutation") +
+      ## Scale to be consistent over the entire dataset
+      # ylim(min(data[[y]]), max(data[[y]])) +
       scale_fill_manual(values = uncc_colors) +
       theme_linedraw() +
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
@@ -231,7 +225,7 @@ mut_plot_df <- data.frame(
     "aa_4jug_pos_190",
     "aa_4jug_pos_224",
     "aa_4jug_pos_225",
-    "aa_4jug_pos_226",
+    # "aa_4jug_pos_226",
     "aa_4jug_pos_228"
   ),
   x_lab = c(
@@ -240,35 +234,37 @@ mut_plot_df <- data.frame(
     "E190 Mutation",
     "N224 Mutation",
     "G225 Mutation",
-    "Q226 Mutation",
+    # "Q226 Mutation",
     "G228 Mutation"
     )
 )
 
 met_plot_df <- data.frame(
   y = c(
-    "vdw_mean"#,
-    # "elec_mean",
-    # "desolv_mean",
-    # "bsa_mean",
-    # "haddock_score_mean",
-    # "total_mean"
+    "vdw_mean",
+    "elec_mean",
+    "desolv_mean",
+    "bsa_mean",
+    "haddock_score_mean",
+    "total_mean"
   ),
   y_lab = c(
-    "Mean van der Waals Energy"#,
-    # "Mean Electrostatic Energy",
-    # "Mean Desolvation Energy",
-    # "Mean Buried Surface Area",
-    # "Mean HADDOCK Score",
-    # "Mean Total Score"
+    "Mean van der Waals Energy",
+    "Mean Electrostatic Energy",
+    "Mean Desolvation Energy",
+    "Mean Buried Surface Area",
+    "Mean HADDOCK Score",
+    "Mean Total Energy"
   )
 )
 
 
 mutation_plots <- list()
 ## Make plot for each combination
-for (mut in 1:nrow(mut_plot_df)){
-  for (met in 1:nrow(met_plot_df)){
+# for (mut in 1:nrow(mut_plot_df)){
+#   for (met in 1:nrow(met_plot_df)){
+for (met in 1:nrow(met_plot_df)){
+  for (mut in 1:nrow(mut_plot_df)){
     x = mut_plot_df[mut, 1]
     x_lab = mut_plot_df[mut, 2]
     y = met_plot_df[met, 1]
@@ -282,14 +278,17 @@ for (mut in 1:nrow(mut_plot_df)){
 ```
 
 ```{r}
-mutation_plots_grid <- ggarrange(plotlist = mutation_plots#,
-                                 # ncol = 6, nrow = 7
+mutation_plots_grid <- ggarrange(plotlist = mutation_plots,
+                                 ncol = 6, nrow = 6
                                  )
 
 mutation_plots_grid
 ```
 
 
+```{r}
+ggsave("../../figures/boxplots_by_mutation_metric_grid.pdf", width = 12.75, height = 16.5, units = "in")
+```
 
 ## Heatmaps
 
