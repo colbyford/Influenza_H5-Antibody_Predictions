@@ -287,7 +287,11 @@ mutation_plots_grid
 
 
 ```{r}
+## Full Grid
 ggsave("../../figures/boxplots_by_mutation_metric_grid.pdf", width = 12.75, height = 16.5, units = "in")
+
+## Two Rows Only
+# ggsave("../../figures/boxplots_by_mutation_metric_grid_vdw.pdf", width = 16.5, height = 6, units = "in")
 ```
 
 ## Heatmaps
