@@ -1,41 +1,23 @@
 # Visualize Phylogenetic Tree with Metadata
 
 ```{r}
+library(ggplot2)
 library(ggtree)
 library(readxl)
 library(dplyr)
 library(tidyr)
 library(stringr)
 ```
+## 164 Taxa Tree
 
-## Load Data
-
-```{r}
-tree <- read.tree("JvaIzS9gqgXQKsGwvbFZQQ_newick.txt")
-
-gisaid_metadata <- read_excel("../../../Experiments.xlsx", sheet = "Full List Antigens")
-clusters <- read_excel("../../../Experiments.xlsx", sheet = "Clusters")
-
-```
-
-
-## Remedy Tip Labels
+### Load Data
 
 ```{r}
-tip_labels <- data.frame(label = tree$tip.label) %>% 
-  separate(label, c("antigen_id"), sep = "_", extra = "drop")
-
-tree$tip.label <- tip_labels$antigen_id
+tree <- ape::read.nexus("tree0.tnt.nex")
+metadata <- read_excel("../../../Experiments.xlsx", sheet = "Antigens")
+results <- read_excel("../../../Experiments.xlsx", sheet = "Experiments")
 ```
 
-
-## Make metadata
-
-```{r}
-metadata <- gisaid_metadata %>%
-  left_join(clusters, by = "antigen_id") %>% 
-  filter(antigen_id %in% tip_labels$antigen_id)
-```
 
 ## Append Metadata
 
@@ -50,24 +32,47 @@ tree_df <- data.frame(node = 1:length(tree$tip.label),
 tree$antigen_host_order <- tree_df$antigen_host_order 
 ```
 
+### Make VDW Results Matrix
 
-## Visualize the Tree
+```{r}
+# genotype_file <- system.file("examples/Genotype.txt", package="ggtree")
+# genotype <- read.table(genotype_file, sep="\t", stringsAsFactor=F)
+# colnames(genotype) <- sub("\\.$", "", colnames(genotype))
+# 
+# genotype
+
+vdw_df <- results %>% 
+  select(antibody_id, antigen_id, vdw_best) %>% 
+  pivot_wider(names_from = antibody_id, values_from = vdw_best) %>% 
+  tibble::column_to_rownames(var="antigen_id") %>% 
+  select(order(colnames(.)))
+
+vdw_df
+
+```
+
+
+
+
+### Visualize the Base Tree
 
 ```{r}
 base_tree_plot <- ggtree(tree,
-                         layout="circular", 
-                         # ladderize = FALSE, 
-                         # branch.length = "none"
-                         continuous = 'colour',
-                         size=2
+                         # layout="circular", 
+                         layout="fan", open.angle=30,
+                         # ladderize = FALSE,
+                         # branch.length = "none",
+                         # continuous = 'colour',
+                         size=1
                          ) %<+% 
-    tip_meta +
+    metadata +
+  geom_tiplab(size=2, align=TRUE, linesize=.5) # +
   # geom_text(aes(label=node), hjust=.3) +
-  scale_color_gradientn(colours=c("red", 'orange', 'green', 'cyan', 'blue')) +
-  geom_tippoint(aes(color=antigen_host_order,
-                    shape=representative_sequence)) +
-  coord_flip() +
-  scale_x_reverse() #+
+  # aes(color=antigen_collection_location_continent) + 
+  # scale_color_gradient(colours=c("red", 'orange', 'green', 'cyan', 'blue')) +
+  # geom_tippoint(aes(color=antigen_host_order)) +
+  # coord_flip() +
+  # scale_x_reverse() #+
   # theme(color = "Host Order"
   #       shape = "Representative Sequence")
   # geom_tiplab(hjust = -.1)
@@ -77,3 +82,19 @@ base_tree_plot <- ggtree(tree,
 base_tree_plot
 ```
 
+
+## Add Heatmap to Tree
+
+```{r}
+
+gheatmap(base_tree_plot,
+         vdw_df,
+         offset=8, width=1, 
+        colnames=TRUE,
+        colnames_angle = 90,
+        hjust = 1,
+        font.size = 3,
+        legend_title="Best van der Waals Energy") +
+    scale_x_ggtree() +
+  scale_fill_viridis_c(option = "plasma")
+```
