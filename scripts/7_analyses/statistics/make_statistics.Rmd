@@ -20,11 +20,11 @@ alpha = 0.05
 ## Load in Data
 
 ```{r}
-experiments <- read_excel("../../Experiments.xlsx", sheet = "Experiments")
-antibodies <- read_excel("../../Experiments.xlsx", sheet = "Antibodies")
-antigens <- read_excel("../../Experiments.xlsx", sheet = "Antigens")
+experiments <- read_excel("../../../Experiments.xlsx", sheet = "Experiments")
+antibodies <- read_excel("../../../Experiments.xlsx", sheet = "Antibodies")
+antigens <- read_excel("../../../Experiments.xlsx", sheet = "Antigens")
 
-## Exclude lab-derived isolates
+## Exclude lab-derived isolate clusters
 exclusions <- c("EPI243001", "EPI287236", "EPI359214")
 
 data <- experiments %>% 
