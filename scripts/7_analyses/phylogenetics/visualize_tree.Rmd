@@ -157,17 +157,23 @@ class_tree <- ggtree(tree_18k_withmetadata,
        layout = "rectangular",
        # ladderize = FALSE,
        # continuous = 'colour',
-       size=0.1) +
+       size=0.2) +
   # coord_flip() +
   # scale_y_reverse() +
-  geom_tippoint(size = 2, aes(colour=antigen_host_class)) +
-  geom_tiplab(size = 1, color='black', hjust = 0.75) +
+  geom_tippoint(size = 1.5, aes(colour=antigen_host_class)) +
+  geom_tiplab(size = 1.2, color='black', hjust = 0.7) +
   # geom_nodelab(size=3, color="red")+
   # geom_hilight(mapping=aes(subset = node %in% tree_18k_withmetadata@data$node,
   #                          fill=antigen_host_class),
   #              alpha = .8) +
   labs(color = "Host Class") +
-  scale_color_manual(values = uncc_colors) +
+  # scale_color_manual(values = uncc_colors) +
+  scale_color_manual(values = c(
+    "#005035", ## Aves
+    "#007377", ## Environment
+    "#F1E6B2", ## Insecta
+    "#802F2D"  ## Mammalia
+    )) +
   # scale_color_brewer(palette = "Set1") +
   theme(
     legend.position = "bottom",
@@ -182,12 +188,18 @@ node_id = 21481
 
 nn <- tidytree::offspring(tree_18k_withmetadata, node_id, self_include=TRUE)
 
-class_tree +
+class_tree_zoom <- class_tree +
   ggforce::facet_zoom(xy = node %in% nn, zoom.size = 0.75)
+
+class_tree_zoom
 ```
 
 ```{r}
 plotly::ggplotly(class_tree)
+```
+
+```{r}
+ggsave()
 ```
 
 
