@@ -178,7 +178,8 @@ make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
   ## Reorder x column in data using mutations
   plot <- ggplot(data %>% 
                    mutate(!!x := fct_relevel(.data[[x]], mutations),
-                          is_ref = .data[[x]] == ref_aa), 
+                          is_ref = .data[[x]] == ref_aa) %>% 
+                   filter(!.data[[x]] %in% "X"), 
                    aes_string(
                      x = x,
                      y = y,
