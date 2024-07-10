@@ -8,12 +8,36 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 ```
+
+
+```{r}
+uncc_colors <- c(
+  ## All in C colors
+  "#005035", ## Charlotte Green
+  "#A49665", ## Niner Gold
+  "#F1E6B2", ## Jasper
+  "#899064", ## Pine Green
+  "#802F2D", ## Clay Red
+  "#007377",  ## Sky Blue
+  
+  ## Others
+  "#717C7D", ## 444C (Grey)
+  "#72246C", ## 255C (Purple)
+  "#006BA6", ## 307C (Blue)
+  "#DF4661", ## 198C
+  "#FFB81C", ## 1235C
+  "#696158"  ## 405C
+  
+)
+```
+
+
 ## 164 Taxa Tree
 
 ### Load Data
 
 ```{r}
-tree <- ape::read.nexus("tree0.tnt.nex")
+tree <- ape::read.nexus("164_tree/tree0.tnt.nex")
 metadata <- read_excel("../../../Experiments.xlsx", sheet = "Antigens")
 results <- read_excel("../../../Experiments.xlsx", sheet = "Experiments")
 ```
@@ -45,13 +69,13 @@ vdw_df <- results %>%
   select(antibody_id, antigen_id, vdw_best) %>% 
   pivot_wider(names_from = antibody_id, values_from = vdw_best) %>% 
   tibble::column_to_rownames(var="antigen_id") %>% 
-  select(order(colnames(.)))
+  select(order(colnames(.))) %>% 
+  mutate(average = rowMeans(pick(where(is.numeric))))
+  
 
 vdw_df
 
 ```
-
-
 
 
 ### Visualize the Base Tree
@@ -86,10 +110,9 @@ base_tree_plot
 ## Add Heatmap to Tree
 
 ```{r}
-
 gheatmap(base_tree_plot,
          vdw_df,
-         offset=8, width=1, 
+         offset=9, width=1, 
         colnames=TRUE,
         colnames_angle = 90,
         hjust = 1,
@@ -97,4 +120,150 @@ gheatmap(base_tree_plot,
         legend_title="Best van der Waals Energy") +
     scale_x_ggtree() +
   scale_fill_viridis_c(option = "plasma")
+```
+
+## 18K Tree
+
+### Load Data
+
+```{r}
+tree_18k <- ape::read.nexus("18k_tree/tree0.tnt.nex")
+
+metadata_18k <- read_excel("../../../Experiments.xlsx", sheet = "Full Antigen Metadata") %>% 
+  mutate(Accession = antigen_id) %>% 
+  replace_na(list(#antigen_host_class = "Not Specified",
+                  antigen_host_order = "Not Specified",
+                  antigen_collection_location_continent = "Not Specified"))
+
+## Filter to taxa actually in the tree
+metadata_18k_filtered <- metadata_18k %>% 
+  filter(antigen_id %in% tree_18k$tip.label) %>% 
+  mutate(label = antigen_id)
+
+## Add metadata to tree
+tree_18k_withmetadata <- full_join(tree_18k, metadata_18k_filtered, by = 'label')
+
+# write.csv(metadata_18k_filtered, "metadata_18k_filtered.csv")
+# write.beast(tree_18k_withmetadata, "18k_tree/tree0_w_meta_beast.nhx")
+```
+
+
+```{r}
+class_tree <- ggtree(tree_18k_withmetadata,
+       aes(color=antigen_host_class),
+       # aes(color=antigen_collection_year),
+       # layout = 'circular',
+       # layout="fan", open.angle=180,
+       layout = "rectangular",
+       # ladderize = FALSE,
+       # continuous = 'colour',
+       size=0.1) +
+  # coord_flip() +
+  # scale_y_reverse() +
+  geom_tippoint(size = 2, aes(colour=antigen_host_class)) +
+  geom_tiplab(size = 1, color='black', hjust = 0.75) +
+  # geom_nodelab(size=3, color="red")+
+  # geom_hilight(mapping=aes(subset = node %in% tree_18k_withmetadata@data$node,
+  #                          fill=antigen_host_class),
+  #              alpha = .8) +
+  labs(color = "Host Class") +
+  scale_color_manual(values = uncc_colors) +
+  # scale_color_brewer(palette = "Set1") +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  )
+```
+
+```{r}
+# node_id = 21495 ## Most distant clade
+# node_id = 21480
+node_id = 21481
+
+nn <- tidytree::offspring(tree_18k_withmetadata, node_id, self_include=TRUE)
+
+class_tree +
+  ggforce::facet_zoom(xy = node %in% nn, zoom.size = 0.75)
+```
+
+```{r}
+plotly::ggplotly(class_tree)
+```
+
+
+
+```{r}
+library(strainhub)
+
+## Check for missing taxa
+setdiff(tree_18k$tip.label, metadata_18k$Accession)
+
+## Check to See Which States are available by which to generate the network
+list_states(tree_18k,
+            metadata_18k,
+            treeType = "parsimonious")
+```
+
+### Make Transmission Network
+
+#### Continent
+
+```{r}
+continent_graph <- make_transnet(tree_18k,
+                                 metadata_18k,
+                                 columnSelection = "antigen_collection_location_continent",
+                                 centralityMetric = 6,
+                                 treeType = "parsimonious")
+
+# continent_graph
+
+## Using the graph object from before...
+library(visNetwork)
+
+nodes <- continent_graph$x$nodes %>%
+  mutate(shape = "dot",
+         color = "grey",
+         font.size = 20)
+
+## Define new edge colors
+colors <- randomcoloR::distinctColorPalette(k = nrow(continent_graph$x$edges))
+
+edges <- continent_graph$x$edges %>%
+  mutate(arrows = "to",
+         smooth = TRUE,
+         color = colors,
+         width = ifelse(value == 1, 1, 4),
+         value = NULL)
+
+## Generate the custom network using `visNetwork`
+visNetwork(nodes, edges) %>%
+  visOptions(nodesIdSelection = list(enabled = TRUE)) %>% 
+  visPhysics(repulsion=list(
+    nodeDistance=1000
+  ),
+  enabled=FALSE)
+
+
+
+# continent_geodata <- read.csv("continent_geodata.csv")
+
+# continent_map <- make_map(continent_graph,
+#                          continent_geodata,
+#                          columnSelection = "antigen_collection_location_continent",
+#                          basemapLayer = "Gray",
+#                          showLabels = TRUE)
+
+# continent_map
+```
+
+#### Host Class
+
+```{r}
+class_graph <- make_transnet(tree_18k,
+                       metadata_18k,
+                       columnSelection = "antigen_host_class",
+                       centralityMetric = 6,
+                       treeType = "parsimonious")
+
+class_graph
 ```
