@@ -1,0 +1,268 @@
+# Create StrainHub Networks
+
+
+```{r}
+library(strainhub)
+library(visNetwork)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(stringr)
+```
+
+
+## 18k Tree
+
+```{r}
+tree_18k <- ape::read.nexus("18k_tree/tree0.tnt.nex")
+
+metadata_18k <- read_excel("../../../Experiments.xlsx", sheet = "Full Antigen Metadata") %>% 
+  mutate(Accession = antigen_id) %>% 
+  replace_na(list(antigen_host_class = "Not Specified",
+                  antigen_host_order = "Not Specified",
+                  antigen_collection_location_continent = "Not Specified"))
+
+## Filter to taxa actually in the tree
+metadata_18k_filtered <- metadata_18k %>% 
+  filter(antigen_id %in% tree_18k$tip.label) %>% 
+  mutate(label = antigen_id)
+
+## Add metadata to tree
+# tree_18k_withmetadata <- full_join(tree_18k, metadata_18k_filtered, by = 'label')
+```
+
+```{r}
+## Check for missing taxa
+setdiff(tree_18k$tip.label, metadata_18k$Accession)
+
+## Check to See Which States are available by which to generate the network
+list_states(tree_18k,
+            metadata_18k,
+            treeType = "parsimonious")
+```
+
+### Make Transmission Network
+
+#### Colors
+```{r}
+colors <- c("#005035", ## Aves
+    "#007377", ## Environment
+    "#F1E6B2", ## Insecta
+    "#802F2D"  ## Mammalia
+)
+
+```
+
+#### Host Class
+
+```{r}
+class_graph <- make_transnet(tree_18k,
+                             metadata_18k_filtered,
+                             columnSelection = "antigen_host_class",
+                             centralityMetric = 6,
+                             treeType = "parsimonious")
+
+# class_graph
+
+## Customize it
+
+class_nodes <- class_graph$x$nodes %>%
+  mutate(shape = "dot",
+         # color = "grey",
+         color = case_when(
+           label == "Aves" ~ "#005035",
+           label == "Environment" ~ "#007377",
+           label == "Insecta" ~ "#F1E6B2",
+           label == "Mammalia" ~ "#802F2D",
+           label == "Not Specified" ~ "grey"
+         ),
+         label = paste0(class_graph$x$nodes$label,"\n(",round(class_graph$x$nodes$value, digits = 2),")"),
+         font.size = 20)
+
+
+class_edges <- class_graph$x$edges %>%
+  mutate(arrows = "to",
+         smooth = TRUE,
+         color = ifelse(to == 4, "red", "grey"),
+         # color = class_transmission_colors,
+         # color = colors,
+         width = case_when(
+           value < 100 ~ 1,
+           value >= 100 & value < 500 ~ 4,
+           value > 500 ~ 8
+         ),
+         label = as.character(value))
+
+visNetwork(class_nodes, class_edges) %>% 
+   visPhysics(solver = "forceAtlas2Based", 
+            forceAtlas2Based = list(gravitationalConstant = -75))
+```
+
+
+#### Continent
+
+```{r}
+continent_graph <- make_transnet(tree_18k,
+                                 metadata_18k,
+                                 columnSelection = "antigen_collection_location_continent",
+                                 centralityMetric = 6,
+                                 treeType = "parsimonious")
+
+# continent_graph
+continent_geodata <- read.csv("continent_geodata.csv")
+
+## Customize it
+
+continent_nodes <- continent_graph$x$nodes %>%
+  # inner_join(continent_geodata, by = c("label" = "continent")) %>% 
+  # filter(label != "Not Specified") %>%
+  mutate(shape = "dot",
+         color = "black",
+         label = paste0(continent_graph$x$nodes$label,"\n(",round(continent_graph$x$nodes$value, digits = 2),")"),
+         font.size = 20)
+
+## Get colors for the continent_graph$x$edges$value column
+continent_values_rescaled <- scales::rescale(continent_graph$x$edges$value)
+## Get vector of colors
+continent_transmission_colors <- scales::col_numeric("magma", domain = NULL)(continent_values_rescaled)
+
+continent_edges <- continent_graph$x$edges %>%
+  mutate(arrows = "to",
+         smooth = TRUE,
+         color = continent_transmission_colors,
+         # color = colors,
+         width = case_when(
+           value < 100 ~ 1,
+           value >= 100 & value < 200 ~ 3,
+           value > 300 ~ 9
+         ),
+         label = as.character(value))
+
+
+## overlay over map
+visNetwork(continent_nodes, continent_edges) %>%
+   visPhysics(solver = "repulsion",
+              repulsion = list(
+                nodeDistance = 100,
+                springLength = 400,
+                damping = 0.75
+                ))
+```
+
+## Make Map
+
+```{r}
+
+## Settings
+basemapLayer <- "Gray"
+arrowFilled <- TRUE
+hideArrowHead <- FALSE
+showLabels <- TRUE
+labelColor <- "black"
+showPoints <- TRUE
+pointColor <- "black"
+pointOpacity <- 1
+
+## Build Dataframe
+locations <- continent_graph$x$nodes %>%
+  inner_join(continent_geodata, by = c("label" = columnSelection)) %>% 
+  filter(label != "Not Specified")
+
+continent_graph_df <- continent_graph$x$edges %>%
+    select(-value) %>%
+    dplyr::inner_join(locations, by = c("from" = "id")) %>%
+    dplyr::inner_join(locations, by = c("to" = "id"), suffix = c(".from", ".to")) %>%
+    mutate(path = paste0(label.from,"->",label.to),
+           # stroke = as.numeric(value.from)/2,
+           stroke = as.numeric(value.from),
+           color = "grey") %>% 
+  filter(label.to != "Not Specified",
+         label.from != "Not Specified")
+
+## Build Map
+## Setup for Swoopy.js
+esriPlugin <- htmltools::htmlDependency("leaflet.esri", "1.0.3",
+                             src = c(href = "https://cdn.jsdelivr.net/leaflet.esri/1.0.3/"),
+                             script = "esri-leaflet.js"
+)
+
+swoopyPlugin <- htmltools::htmlDependency("leaflet-swoopy", "3.4.1",
+                               src = c(href = "https://unpkg.com/leaflet-swoopy@3.4.1/build/"),
+                               script = "Leaflet.SwoopyArrow.min.js"
+)
+
+registerleafletPlugin <- function(map, plugin) {
+  map$dependencies <- c(map$dependencies, list(plugin))
+  map
+}
+
+header <- "function(el, x) {"
+## https://esri.github.io/esri-leaflet/api-reference/layers/basemap-layer.html
+basemap <- paste0("L.esri.basemapLayer('",basemapLayer,"').addTo(this);")
+swoopys <- ""
+for (i in 1:nrow(continent_graph_df)){
+  fromLat <- continent_graph_df$Latitude.from[i]
+  fromLong <- continent_graph_df$Longitude.from[i]
+  toLat <- continent_graph_df$Latitude.to[i]
+  toLong <- continent_graph_df$Longitude.to[i]
+  color <- continent_graph_df$color[i]
+  value <- continent_graph_df$value.from[i]
+  arrow <- if(arrowFilled){"true"}else{"false"}
+  head <- if(hideArrowHead){"true"}else{"false"}
+  swoopyIter <- paste0("L.swoopyArrow([",fromLat,",",fromLong,"], [",toLat,",",toLong,"], {color: '",color,"', factor: 0.7, weight: 2, hideArrowHead: ",head,", arrowFilled: ",arrow,", label: ",value,"}).addTo(this);")
+  #print(swoopyIter)
+  swoopys <- paste0(swoopys, swoopyIter)
+}
+
+fromLocs <- continent_graph_df %>% select(label.from, Latitude.from, Longitude.from)
+colnames(fromLocs) <- c("location", "latitude", "longitude")
+toLocs <- continent_graph_df %>% select(label.to, Latitude.to, Longitude.to)
+colnames(toLocs) <- c("location", "latitude", "longitude")
+allLocs <- fromLocs %>% rbind(toLocs) %>% unique()
+
+labels <- ""
+if (showLabels){
+
+  for (i in 1:nrow(allLocs)){
+    fromLat <- allLocs$latitude[i]
+    fromLong <- allLocs$longitude[i]
+    toLat <- allLocs$latitude[i]
+    toLong <- allLocs$longitude[i]
+    loc <- allLocs$location[i]
+    labelIter <- paste0("L.swoopyArrow([",fromLat,",",fromLong,"], [",toLat,",",toLong,"], {label: '",loc,"', labelColor: '",labelColor,"', labelFontSize: 14, iconAnchor: [-5, -5], iconSize: [20, 16], factor: 0.7, weight: 0}).addTo(this);")
+    #print(labelIter)
+    labels <- paste0(labels, labelIter)
+  }
+}
+
+points <- ""
+
+if (showPoints){
+  for (i in 1:nrow(allLocs)){
+    fromLat <- allLocs$latitude[i]
+    fromLong <- allLocs$longitude[i]
+    toLat <- allLocs$latitude[i]
+    toLong <- allLocs$longitude[i]
+    loc <- allLocs$location[i]
+    pointsIter <- paste0("L.circleMarker([",fromLat,",",fromLong,"], {color: '",pointColor,"', fillColor: '",pointColor,"', fillOpacity: ",pointOpacity,", stroke: 0, }).addTo(this);")
+    points <- paste0(points, pointsIter)
+  }
+}
+
+footer <- "}"
+
+renderText <- paste0(header, basemap, points, swoopys, labels, footer)
+
+map <- leafletmap <- leaflet() %>%
+  addProviderTiles(providers$Esri.WorldImagery) %>%
+  addScaleBar(position = "bottomleft") %>%
+  setView(mean(continent_graph_df$Longitude.from), mean(continent_graph_df$Latitude.from), zoom = 5) %>%
+  registerleafletPlugin(esriPlugin) %>%
+  registerleafletPlugin(swoopyPlugin) %>%
+  htmlwidgets::onRender(renderText)
+```
+
+
+
+
+
