@@ -1,13 +1,13 @@
 # Large-Scale Computational Modeling of H5 Influenza Against HA1-Neutralizing Antibodies
 
 
-<h3 align="right">Colby T. Ford, Shirish Yasa, Sayal Guirales-Medrano, Richard Allen White III, Daniel Janies</h3>
+<h3 align="right">Colby T. Ford, Shirish Yasa, Sayal Guirales-Medrano, Richard Allen White III, and Daniel Janies</h3>
 
 ## Data
 
 Outputs:
 - Docking metrics, antigen/antibody metadata, and clustering results: [Experiments.xlsx](Experiments.xlsx)
-- Docked structures (n=1804): [data/results](data/results)
+- Docked structures (n=1,804): [data/results](data/results)
 
 Inputs:
 - Input Sequences: [data/sequences](data/sequences)
