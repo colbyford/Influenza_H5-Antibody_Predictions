@@ -145,7 +145,7 @@ boxplots_by_antibody_grid = ggarrange(boxplot_vdw_by_antibody,
 ```
 
 ```{r}
-ggsave("../../figures/boxplots_by_antibody_grid.pdf", width = 16.5, height = 12.75, units = "in")
+ggsave("../../../figures/boxplots_by_antibody_grid.pdf", width = 16.5, height = 12.75, units = "in")
 ```
 
 
@@ -179,7 +179,7 @@ make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
   plot <- ggplot(data %>% 
                    mutate(!!x := fct_relevel(.data[[x]], mutations),
                           is_ref = .data[[x]] == ref_aa) %>% 
-                   filter(!.data[[x]] %in% "X"), 
+                   filter(!.data[[x]] %in% "X"), ## remove gaps
                    aes_string(
                      x = x,
                      y = y,
@@ -194,7 +194,8 @@ make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
            color = "Mutation") +
       ## Scale to be consistent over the entire dataset
       # ylim(min(data[[y]]), max(data[[y]])) +
-      scale_fill_manual(values = uncc_colors) +
+      # scale_fill_manual(values = uncc_colors) +
+      scale_fill_manual(values = c("grey", "#A49665")) +
       theme_linedraw() +
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
             line = element_line(colour = "grey"),
@@ -209,16 +210,14 @@ make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
 ```
 
 ```{r}
-y = "vdw_mean"
-y_lab = "Mean van der Waals Energy"
+# y = "vdw_mean"
+# y_lab = "Mean van der Waals Energy"
+# 
+# x = "aa_4jug_pos_224"
+# x_lab = "N224 Mutation"
+# 
+# make_mutation_boxplot(x, y, x_lab, y_lab, ref_aa = substr(x_lab,1,1))
 
-x = "aa_4jug_pos_224"
-x_lab = "N224 Mutation"
-
-make_mutation_boxplot(x, y, x_lab, y_lab, ref_aa = substr(x_lab,1,1))
-```
-
-```{r}
 mut_plot_df <- data.frame(
   x = c(
     "aa_4jug_pos_158",
@@ -280,7 +279,8 @@ for (met in 1:nrow(met_plot_df)){
 
 ```{r}
 mutation_plots_grid <- ggarrange(plotlist = mutation_plots,
-                                 ncol = 6, nrow = 6
+                                 # ncol = 6, nrow = 6
+                                 ncol = 6, nrow = 2
                                  )
 
 mutation_plots_grid
@@ -289,10 +289,10 @@ mutation_plots_grid
 
 ```{r}
 ## Two Rows Only
-# ggsave("../../figures/boxplots_by_mutation_metric_grid_vdw.pdf", width = 16.5, height = 6, units = "in")
+# ggsave("../../../figures/boxplots_by_mutation_metric_grid_vdw.pdf", width = 16.5, height = 6, units = "in")
 
 ## Full Grid
-ggsave("../../figures/boxplots_by_mutation_metric_grid.pdf", width = 12.75, height = 16.5, units = "in")
+ggsave("../../../figures/boxplots_by_mutation_metric_grid.pdf", width = 12.75, height = 16.5, units = "in")
 ```
 
 ## Heatmaps
@@ -386,7 +386,7 @@ make_h5_scatter_by_order <- function(y, y_lab){
     ) +
     # xlim(2000, 2024) + 
     scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-    scale_color_manual(values = c("#005035", "#A49665", "#802F2D")) + ## UNCC Colors
+    scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
     facet_wrap(~ antigen_host_order, ncol = 3) +
     labs(y = y_lab,
          x = 'Collection Year',
@@ -445,7 +445,7 @@ scatter_by_year_grid
 
 
 ```{r}
-ggsave("../../figures/scatter_by_year_grid.pdf", width = 11, height = 8.5, units = "in")
+ggsave("../../../figures/scatter_by_year_grid.pdf", width = 11, height = 8.5, units = "in")
 ```
 
 
