@@ -4,18 +4,30 @@
 
 [![Preprint](https://img.shields.io/badge/bioRxiv-10.1101/2024.06.13.603367-bb2635?style=for-the-badge&logo=read.cv)](https://www.biorxiv.org/content/early/2024/06/13/2024.06.13.603367)
 
+![Interface Examples](figures/structures/interfacing_examples.svg)
+
 ## Data
 
-Outputs:
+### Outputs:
+
 - Docking metrics, antigen/antibody metadata, and clustering results: [Experiments.xlsx](Experiments.xlsx)
-- Docked structures (n=1,804): [data/results](data/results)
+- Docked structures ($n=1,804$): [data/results](data/results)
+- Phylogenetic Tree: [tree0.tnt.nex](scripts/7_analyses/phylogenetics/18k_tree/tree0.tnt.nex)
 
-Inputs:
-- Input Sequences: [data/sequences](data/sequences)
-- Input Structures: [data/structures](data/structures)
+### Inputs:
+
+- Antigens ($n=164$):
+    - Input Sequences: [data/sequences](data/sequences)
+    - Predicted Structures: [data/structures/antigens/HA1](data/structures/antigens/HA1)
+- Antibodies ($n=11$):
+    - Structures: [data/structures/antibodies](data/structures/antibodies)
 
 
-## Scripts
+## Workflow
+
+![Workflow](figures/workflow.svg)
+
+### Scripts
 
 0. Sequence Collection: [0_sequence_collection](scripts/0_sequence_collection)
 1. Structure Generation with ColabFold: [1_structure_generation](scripts/1_structure_generation)
