@@ -1,6 +1,6 @@
 # Large-Scale Computational Modeling of H5 Influenza Variants Against HA1-Neutralizing Antibodies
 
-<h3 align="right">Colby T. Ford, Shirish Yasa, Khaled Obeid, Sayal Guirales-Medrano, Richard Allen White III, and Daniel Janies</h3>
+<h3 align="right">Colby T. Ford, Shirish Yasa, Khaled Obeid, Sayal Guirales-Medrano, <br>Richard Allen White III, and Daniel Janies</h3>
 
 ## Data
 
