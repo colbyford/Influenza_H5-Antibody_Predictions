@@ -4,7 +4,7 @@
 
 [![Preprint](https://img.shields.io/badge/bioRxiv-10.1101/2024.06.13.603367-bb2635?style=for-the-badge&logo=read.cv)](https://www.biorxiv.org/content/early/2024/06/13/2024.06.13.603367)
 
-![Interface Examples](figures/structures/interfacing_examples.svg)
+![Interface Example](figures/structures/media/UNCC_H5_mediaheader_AVFluIg03__EPI3358339.png)
 
 ## Data
 
