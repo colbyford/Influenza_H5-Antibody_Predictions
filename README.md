@@ -2,7 +2,7 @@
 
 <h3 align="right">Colby T. Ford, Shirish Yasa, Khaled Obeid, Sayal Guirales-Medrano, <br>Richard Allen White III, and Daniel Janies</h3>
 
-[![Preprint](https://img.shields.io/badge/bioRxiv-10.1101/2024.06.13.603367-bb2635?style=for-the-badge&logo=read.cv)](https://www.biorxiv.org/content/early/2024/06/13/2024.06.13.603367)
+[![Preprint](https://img.shields.io/badge/bioRxiv-10.1101/2024.07.14.603367-bb2635?style=for-the-badge&logo=read.cv)](https://www.biorxiv.org/content/10.1101/2024.07.14.603367)
 
 ![Interface Example](figures/structures/media/UNCC_H5_mediaheader_AVFluIg03__EPI3358339.png)
 
