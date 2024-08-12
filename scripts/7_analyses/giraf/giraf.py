@@ -217,8 +217,11 @@ VARIABLES='res_nums'
 
 # %% Calculate all the GEDs for the INTERCAAT results
 analysis_dir = '/home/ra29435/Documents/Public_GitHub/Influenza_H5-Antibody_Predictions/data/intercaat/'
-file1 = 'EPI242227__AVFluIgG01.pdb_intercaat.txt'
-ab= 'AVFluIgG01' # set antibody of interest to match file1 above
+# file1 = 'EPI242227__AVFluIgG01.pdb_intercaat.txt'
+# ab= 'AVFluIgG01' # set antibody of interest to match file1 above
+
+file1='EPI242227__H5.3.pdb_intercaat.txt'
+ab='H5.3'
 
 df1 = parse_intercaat(analysis_dir + file1, lut)
 graph1, idf = generate_graph(df1, variables=VARIABLES)
@@ -256,69 +259,19 @@ haddock_geds.set_index('protein', inplace=True)
 haddock_geds.sort_values(by='protein', ascending=True, inplace=True)
 haddock_geds.drop(columns=['index', 'filename', 'basename'], inplace=True)
 
-
-# %% Comparing HADDOCK to AF2
-
-analysis_dir = 'CXCL12beta_analysis/'
-haddock_dir = 'HADDOCK_INTERCAAT/'
-af2_dir = 'AF2_INTERCAAT/'
-
-haddock_file_list = listdir(analysis_dir + haddock_dir)
-af2_file_list = listdir(analysis_dir + af2_dir)
-haddock_file_list.sort()
-af2_file_list.sort()
-
-# ged is the graph edit distance
-# num_ir is the number of interacting residues
-geds = pd.DataFrame(columns=['filename', 'ged','haddock_num_ir', 'af2_num_ir'])
-af2_index = 0
-for haddock_file in haddock_file_list:
-    try:
-        af2_df = parse_intercaat(analysis_dir + af2_dir + af2_file_list[af2_index], lut)  
-        af2_graph, idf = generate_graph(af2_df, variables=VARIABLES)
-        
-        haddock_df = parse_intercaat(analysis_dir + haddock_dir + haddock_file, lut)
-        haddock_graph, idf = generate_graph(haddock_df, variables=VARIABLES)
-        print(af2_file_list[af2_index] + ' vs. ' + haddock_file)
-        one_ged = nx.graph_edit_distance(af2_graph, haddock_graph, timeout=TIMEOUT, node_subst_cost=node_subst_cost)
-              
-        # num_ir counting on the N protein
-        A_chain=list()
-        for key in haddock_graph._node:
-             if key.startswith("A"):
-                 A_chain.append(key)                 
-        haddock_num_ir = len(A_chain)       
-        
-        # num_ir counting on the N protein
-        A_chain=list()
-        for key in af2_graph._node:
-             if key.startswith("A"):
-                 A_chain.append(key)                 
-        af2_num_ir = len(A_chain)   
-        
-        
-        geds = pd.concat([geds, pd.DataFrame(data=[[haddock_file, one_ged,haddock_num_ir, af2_num_ir ]], columns=['filename', 'ged', 'haddock_num_ir', 'af2_num_ir'])])
-    finally:
-        af2_index += 1
-        continue
-    
-geds.reset_index(inplace=True)
-geds['protein'] = geds['filename'].str.split('_', expand=True).iloc[:,0]
-geds.set_index('protein', inplace=True)
-geds.sort_values(by='ged', ascending=True, inplace=True)
-
+haddock_geds.to_csv(ab + '__EPI242227.tsv', sep='\t')
 
 # %% Plotting Bars for GEDs
 
-fig = plt.figure(figsize=(14,9))
+fig = plt.figure(figsize=(40,30))
 
 def get_axis_limits(ax):
     return ax.get_xlim()[0]*-0.5, ax.get_ylim()[1]*1.1
 
-af2_geds.sort_values(by='ged', inplace=True)
-subax1 = plt.subplot(311)
-subax1.barh(af2_geds.index, af2_geds.ged)
-subax1.set_xlabel('AlphaFold2 - GED from SARS-CoV-2-WA1 N')
+haddock_geds.sort_values(by='ged', inplace=True)
+subax1 = plt.subplot(121)
+subax1.barh(haddock_geds.index, haddock_geds.ged)
+subax1.set_xlabel('HADDOCK - GED from EPI242227')
 subax1.set_title('A', loc='left', fontsize=16, fontweight='bold')
 
 #subax1.annotate('A', xy=get_axis_limits(subax1), fontsize=14)
@@ -328,42 +281,19 @@ subax1.set_title('A', loc='left', fontsize=16, fontweight='bold')
 
 # Plotting Bars for Number of Interacting Residues
 
-subax2 = plt.subplot(311)
-haddock_geds.sort_values(by='ged', inplace=True)
-subax2.barh(haddock_geds.index, haddock_geds.ged)
-subax2.set_xlabel('HADDOCK - GED from SARS-CoV-2-WA1 N')
+subax2 = plt.subplot(122)
+haddock_geds.sort_values(by='num_ir', inplace=True)
+subax2.barh(haddock_geds.index, haddock_geds.num_ir)
+subax2.set_xlabel(r'# of Interface Residues under 3Å')
 #ax.set_xlim([100, 200])
 subax2.set_title('B', loc='left', fontsize=16, fontweight='bold')
 
 # Plotting Bars for GEDs
 
-#fig = plt.figure(figsize=(14,9))
-
-
-geds.sort_values(by='ged', inplace=True)
-subax1 = plt.subplot(313)
-subax1.barh(geds.index, geds.ged)
-subax1.set_xlabel('GED Between AlphaFold2 and HADDOCK')
-subax1.set_title('C', loc='left', fontsize=16, fontweight='bold')
-#subax1.annotate('A', xy=get_axis_limits(subax1), fontsize=14)
-
-#ax.set_xlim([100, 200])
-#ax.set_title(r'Best N <> CXCL12$\beta$ Compared to' '\n' r'SARS-CoV-2-XBB-N <> CXCL12$\beta$')
-
-# Plotting Bars for Number of Interacting Residues
-
-geds.sort_values(by='haddock_num_ir', inplace=True)
-subax2 = plt.subplot(224)
-subax2.barh(geds.index, geds.haddock_num_ir, label='HADDOCK', alpha=0.7)
-subax2.barh(geds.index, geds.af2_num_ir, label='AlphaFold2', alpha=0.7)
-subax2.set_xlabel(r'# of Interface Residues under 3Å')
-#ax.set_xlim([100, 200])
-subax2.set_title('D', loc='left', fontsize=16, fontweight='bold')
-
 plt.legend()
 fig.tight_layout(h_pad=3)
 
-fig.savefig('GED_4panel.pdf')
+#fig.savefig('GEDs.pdf')
 
 
 # %% Bipartite Example
@@ -412,4 +342,4 @@ subax2.set_title(r'(A) AVFluIgG01', fontsize=20)
 subax2.text(x=-0.2, y=-1.24, s=r'(B) EPI2437377', fontsize=20)
 
 plt.tight_layout()
-plt.savefig('graph_bipartite.pdf')
+#plt.savefig('graph_bipartite.pdf')
