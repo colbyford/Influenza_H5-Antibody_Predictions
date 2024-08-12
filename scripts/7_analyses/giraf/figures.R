@@ -9,7 +9,8 @@ antigens <- read_excel("../../../Experiments.xlsx", sheet = "Antigens") %>%
   select(antigen_id, antigen_host_class, antigen_host_order, antigen_collection_year)
 
 ## Define list of GIRAF output paths
-giraf_paths <- c("AVFluIgG01__EPI242227.tsv")
+# giraf_paths <- c("AVFluIgG01__EPI242227.tsv")
+giraf_paths <- list.files(pattern = "__EPI242227\\.tsv$", ignore.case = TRUE)
 
 giraf_data <- data.frame(
   antigen_id = character(0),
@@ -37,14 +38,12 @@ for (giraf_path in giraf_paths){
 }
 
 ## Join back to the antigen metadata
-antigens <- antigens %>%
-  left_join(giraf_data)
-
-
+giraf_data_full <- giraf_data %>% 
+  full_join(antigens)
 
 ## Make scatter plots
 
-ged_scatter_plot <- ggplot(antigens %>% filter(#antigen_collection_year >= 2000,
+ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antigen_collection_year >= 2000,
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
 aes_string(
@@ -65,7 +64,7 @@ aes_string(
   stat_cor(method = "spearman",
            color = "black",
            label.x = 2000,
-           label.y = min(antigens$ged)
+           label.y = min(giraf_data_full$ged)
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
@@ -84,7 +83,7 @@ aes_string(
   )
 
 
-numir_scatter_plot <- ggplot(antigens %>% filter(#antigen_collection_year >= 2000,
+numir_scatter_plot <- ggplot(giraf_data_full %>% filter(#antigen_collection_year >= 2000,
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
 aes_string(
@@ -105,7 +104,7 @@ aes_string(
   stat_cor(method = "spearman",
            color = "black",
            label.x = 2000,
-           label.y = min(antigens$num_ir)
+           label.y = min(giraf_data_full$num_ir)
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
