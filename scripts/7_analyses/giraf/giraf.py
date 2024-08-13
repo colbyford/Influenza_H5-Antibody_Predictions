@@ -91,7 +91,7 @@ def parse_intercaat(filename, lut = None):
     # change qc to ic, for chain B
     interactions_df['ic_map_res_num'] = 0
     for p in range(0, len(interactions_df)):
-         interactions_df['ic_map_res_num'].iloc[p] = lut['consensus'].loc[lut[protein]+110 == int(interactions_df['ic_res_num'].iloc[p])]
+         interactions_df.loc[p, 'ic_map_res_num'] = lut['consensus'].loc[lut[protein]+110 == int(interactions_df['ic_res_num'].iloc[p])].values
          p = p + 1
         
     interactions_df['ic_map_res_num'] = interactions_df['ic_map_res_num'].astype(str)
@@ -220,8 +220,8 @@ analysis_dir = '/home/ra29435/Documents/Public_GitHub/Influenza_H5-Antibody_Pred
 # file1 = 'EPI242227__AVFluIgG01.pdb_intercaat.txt'
 # ab= 'AVFluIgG01' # set antibody of interest to match file1 above
 
-file1='EPI242227__H5.3.pdb_intercaat.txt'
-ab='H5.3'
+file1='EPI242227__FLD21.140.pdb_intercaat.txt'
+ab='FLD21'
 
 df1 = parse_intercaat(analysis_dir + file1, lut)
 graph1, idf = generate_graph(df1, variables=VARIABLES)
