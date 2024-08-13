@@ -9,8 +9,7 @@ antigens <- read_excel("../../../Experiments.xlsx", sheet = "Antigens") %>%
   select(antigen_id, antigen_host_class, antigen_host_order, antigen_collection_year)
 
 ## Define list of GIRAF output paths
-# giraf_paths <- c("AVFluIgG01__EPI242227.tsv")
-giraf_paths <- list.files(pattern = "__EPI242227\\.tsv$", ignore.case = TRUE)
+giraf_paths <- list.files(path = "../../../data/ged_tables/", pattern = "__EPI242227\\.tsv$", full.names = TRUE, ignore.case = TRUE)
 
 giraf_data <- data.frame(
   antigen_id = character(0),
@@ -23,7 +22,7 @@ giraf_data <- data.frame(
 ## Read in each GIRAF output and append to 
 for (giraf_path in giraf_paths){
   print(giraf_path)
-  antibody_id = strsplit(giraf_path, "__")[[1]][[1]]
+  antibody_id = strsplit(strsplit(giraf_path, "//")[[1]][[2]], "__")[[1]][[1]]
   
   giraf_data_iter <- read.csv(giraf_path,
                          sep = "\t",
@@ -43,7 +42,7 @@ giraf_data_full <- giraf_data %>%
 
 ## Make scatter plots
 
-ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antigen_collection_year >= 2000,
+ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194"),
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
 aes_string(
@@ -68,7 +67,7 @@ aes_string(
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
-  facet_wrap(~ antigen_host_order, ncol = 3) +
+  facet_wrap(antibody_id ~ antigen_host_order, ncol = 3) +
   labs(y = "Graph Edit Distance (From EPI242227)",
        x = 'Collection Year',
        color = "Host Order") +
@@ -83,7 +82,7 @@ aes_string(
   )
 
 
-numir_scatter_plot <- ggplot(giraf_data_full %>% filter(#antigen_collection_year >= 2000,
+numir_scatter_plot <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194"),
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
 aes_string(
@@ -108,8 +107,8 @@ aes_string(
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
-  facet_wrap(~ antigen_host_order, ncol = 3) +
-  labs(y = "Number of Interfacing Residus",
+  facet_wrap(antibody_id ~ antigen_host_order, ncol = 3) +
+  labs(y = "Number of Interfacing Residues",
        x = 'Collection Year',
        color = "Host Order") +
   theme_linedraw() +
