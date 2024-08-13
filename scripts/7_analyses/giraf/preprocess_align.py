@@ -37,22 +37,22 @@ def make_lut(filename):
     # The consensus sequence MUST be in row 0.
     p = 1;
     lut = pd.DataFrame(data=consensus_order, columns=['consensus'])
+    lut.loc[:, msa['protein'].iloc[1:]] = np.nan
     while p <= len(msa)-1:
     #while p <= 2:
         variant = msa['protein'].iloc[p]
-        lut[variant] = np.nan
-        print('Making LUT for ' + msa['protein'].iloc[p])
+        print('Making LUT for ' + msa.loc[p, 'protein'])
         count = 0;
         for m in range(0,len(msa['sequence'].iloc[p])):
             
             # Check if there is a point mutation
             if msa['sequence'].iloc[p][m].isalpha():
-                lut[variant].iloc[m] = count
+                lut.loc[m, variant] = count
                 count = count + 1;
             
             # check if it's same as consensus
             elif msa['sequence'].iloc[p][m] in '.' :
-               lut[variant].iloc[m] = count
+               lut.loc[m, variant] = count
                count = count + 1;
                 
             # check if there's a deletion        
