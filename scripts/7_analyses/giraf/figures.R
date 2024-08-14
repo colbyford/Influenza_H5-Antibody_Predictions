@@ -44,6 +44,7 @@ giraf_data_full <- giraf_data %>%
 
 ## Make scatter plots
 
+### GED Plot with all Antibodies
 ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194"),
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
@@ -84,7 +85,7 @@ aes_string(
         legend.position = "none"
   )
 
-
+## GED Plot with examples
 ged_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
@@ -125,7 +126,7 @@ aes_string(
         legend.position = "none"
   )
 
-
+### Number of Interfacing Residues plot with all antibodies
 numir_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
@@ -166,6 +167,7 @@ aes_string(
         legend.position = "none"
   )
 
+### Number of Interfacing Residues plot with examples
 numir_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "3C11"),
   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 ),
