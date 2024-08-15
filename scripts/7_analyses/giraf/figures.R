@@ -208,7 +208,7 @@ aes_string(
         legend.position = "none"
   )
 
-
+## Combine plots
 ggarrange(ged_scatter_plot,
           ged_scatter_plot_fabs,
           numir_scatter_plot,
@@ -216,5 +216,5 @@ ggarrange(ged_scatter_plot,
           labels = c("A.", "B.", "C.", "D."),
           ncol = 2, nrow = 2, align = "hv")
 
-
+## Save plot
 ggsave("../../../figures/giraf_scatter_by_year.pdf", width = 12.75, height = 8.25, units = "in")
