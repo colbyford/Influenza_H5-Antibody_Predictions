@@ -22,7 +22,8 @@ giraf_data <- data.frame(
 ## Read in each GIRAF output and append to 
 for (giraf_path in giraf_paths){
   print(giraf_path)
-  antibody_id = strsplit(strsplit(giraf_path, "//")[[1]][[2]], "__")[[1]][[1]]
+  # antibody_id = strsplit(strsplit(giraf_path, "//")[[1]][[2]], "__")[[1]][[1]] ## unix
+  antibody_id = strsplit(strsplit(giraf_path, "/")[[1]][[6]], "__")[[1]][[1]] ## windows
   
   giraf_data_iter <- read.csv(giraf_path,
                          sep = "\t",
@@ -43,6 +44,30 @@ giraf_data_full <- giraf_data %>%
 # write_csv(giraf_data_full, "giraf_data_full.csv")
 
 ## Make scatter plots
+
+## Find all statistically significant spearman correlations 
+## of ged/num_ir for pairs of antigen_host_order and antibody_id
+ged_correlations <- giraf_data_full %>% 
+  filter(
+    antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates"),
+    antigen_collection_year >= 2000
+         ) %>% 
+  group_by(antigen_host_order, antibody_id) %>% 
+  summarise(correlation = cor.test(ged, antigen_collection_year, method = "spearman")$estimate,
+            p_value = cor.test(ged, antigen_collection_year, method = "spearman")$p.value) %>% 
+  mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
+  filter(p_value < 0.05)
+
+numir_correlations <- giraf_data_full %>% 
+  filter(
+    antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates"),
+    antigen_collection_year >= 2000
+    ) %>% 
+  group_by(antigen_host_order, antibody_id) %>% 
+  summarise(correlation = cor.test(num_ir, antigen_collection_year, method = "spearman")$estimate,
+            p_value = cor.test(num_ir, antigen_collection_year, method = "spearman")$p.value) %>% 
+  mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
+  filter(p_value < 0.05)
 
 ### GED Plot with all Antibodies
 ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194"),
@@ -86,15 +111,18 @@ aes_string(
   )
 
 ## GED Plot with examples
-ged_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
-  antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
-),
+# ged_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
+#   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+# ),
+ged_scatter_plot_fabs <- ggplot(giraf_data_full %>% 
+                                  mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
+                                  filter(comparison %in% c(ged_correlations$comparison)),
 aes_string(
   x = "antigen_collection_year",
   y = "ged",
   group = "antigen_host_order",
-  color = "antigen_host_order",
-  alpha = 0.35
+  color = "antigen_host_order"#,
+  # alpha = 0.35
 )) + 
   geom_point() +
   geom_smooth(method = lm,
@@ -110,7 +138,7 @@ aes_string(
            label.y = min(giraf_data_full$ged) + 5
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-  scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
+  scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
   facet_wrap(antibody_id ~ antigen_host_order, ncol = 3, labeller = label_wrap_gen(multi_line=FALSE)) +
   # facet_wrap( ~ antigen_host_order, ncol = 3) +
   labs(y = "Graph Edit Distance (from EPI242227)",
@@ -168,15 +196,18 @@ aes_string(
   )
 
 ### Number of Interfacing Residues plot with examples
-numir_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "3C11"),
-  antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
-),
+# numir_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "3C11"),
+#   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+# ),
+numir_scatter_plot_fabs <- ggplot(giraf_data_full %>% 
+                                    mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
+                                    filter(comparison %in% c(numir_correlations$comparison)),
 aes_string(
   x = "antigen_collection_year",
   y = "num_ir",
   group = "antigen_host_order",
-  color = "antigen_host_order",
-  alpha = 0.35
+  color = "antigen_host_order"#,
+  # alpha = 0.35
 )) + 
   geom_point() +
   geom_smooth(method = lm,
@@ -192,8 +223,8 @@ aes_string(
            label.y = min(giraf_data_full$num_ir) + 2
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-  scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
-  facet_wrap(antibody_id ~ antigen_host_order, ncol = 3, labeller = label_wrap_gen(multi_line=FALSE)) +
+  scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
+  facet_wrap(antibody_id ~ antigen_host_order, ncol = 2, labeller = label_wrap_gen(multi_line=FALSE)) +
   # facet_wrap( ~ antigen_host_order, ncol = 3) +
   labs(y = "Number of Interfacing Residues",
        x = 'Collection Year',
