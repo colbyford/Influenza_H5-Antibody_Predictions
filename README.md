@@ -40,4 +40,5 @@
     - Statistics: [7_analyses/statistics](scripts/7_analyses/statistics)
     - Structure Analyses: [7_analyses/statistics](scripts/7_analyses/structure_analyses)
     - Phylogenetics: [7_analyses/phylogenetics](scripts/7_analyses/phylogenetics)
+    - _GIRAF_ Graph Analyses: [scripts/7_analyses/giraf](scripts/7_analyses/giraf)
 
