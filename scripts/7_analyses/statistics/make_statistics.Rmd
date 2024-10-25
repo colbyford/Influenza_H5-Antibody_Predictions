@@ -362,7 +362,8 @@ ggsave("../../figures/dendro_vdw_grid.pdf", width = 5.5, height = 11, units = "i
 make_h5_scatter_by_order <- function(y, y_lab){
   
   plot <- ggplot(data %>% filter(#antigen_collection_year >= 2000,
-                                 antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+                                 # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+                                antigen_host_order %in% c("Primates")
   ),
   aes_string(
     x = "antigen_collection_year",
@@ -386,7 +387,8 @@ make_h5_scatter_by_order <- function(y, y_lab){
     ) +
     # xlim(2000, 2024) + 
     scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-    scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
+    # scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
+    scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
     facet_wrap(~ antigen_host_order, ncol = 3) +
     labs(y = y_lab,
          x = 'Collection Year',
@@ -438,14 +440,15 @@ scatter_by_year_grid = ggarrange(scatter_vdw_by_year,
                                  scatter_haddock_by_year,
                                  scatter_total_by_year,
                                  labels = c("A.", "B.", "C.", "D.", "E.", "F."),
-                                 ncol = 2, nrow = 3)
+                                 ncol = 3, nrow = 2)
 
 scatter_by_year_grid
 ```
 
 
 ```{r}
-ggsave("../../../figures/scatter_by_year_grid.pdf", width = 11, height = 8.5, units = "in")
+# ggsave("../../../figures/scatter_by_year_grid.pdf", width = 11, height = 8.5, units = "in")
+ggsave("../../../figures/scatter_by_year_grid_Primates.pdf", width = 8.5, height = 5.5, units = "in")
 ```
 
 
