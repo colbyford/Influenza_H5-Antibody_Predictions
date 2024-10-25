@@ -22,8 +22,8 @@ giraf_data <- data.frame(
 ## Read in each GIRAF output and append to 
 for (giraf_path in giraf_paths){
   print(giraf_path)
-  # antibody_id = strsplit(strsplit(giraf_path, "//")[[1]][[2]], "__")[[1]][[1]] ## unix
-  antibody_id = strsplit(strsplit(giraf_path, "/")[[1]][[6]], "__")[[1]][[1]] ## windows
+  antibody_id = strsplit(strsplit(giraf_path, "//")[[1]][[2]], "__")[[1]][[1]] ## unix
+  # antibody_id = strsplit(strsplit(giraf_path, "/")[[1]][[6]], "__")[[1]][[1]] ## windows
   
   giraf_data_iter <- read.csv(giraf_path,
                          sep = "\t",
@@ -49,7 +49,8 @@ giraf_data_full <- giraf_data %>%
 ## of ged/num_ir for pairs of antigen_host_order and antibody_id
 ged_correlations <- giraf_data_full %>% 
   filter(
-    antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates"),
+    # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates"),
+    antigen_host_order %in% c("Primates"),
     antigen_collection_year >= 2000
          ) %>% 
   group_by(antigen_host_order, antibody_id) %>% 
@@ -60,7 +61,8 @@ ged_correlations <- giraf_data_full %>%
 
 numir_correlations <- giraf_data_full %>% 
   filter(
-    antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates"),
+    # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates"),
+    antigen_host_order %in% c("Primates"),
     antigen_collection_year >= 2000
     ) %>% 
   group_by(antigen_host_order, antibody_id) %>% 
@@ -71,7 +73,8 @@ numir_correlations <- giraf_data_full %>%
 
 ### GED Plot with all Antibodies
 ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194"),
-  antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+  # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+  antigen_host_order %in% c("Primates")
 ),
 aes_string(
   x = "antigen_collection_year",
@@ -94,7 +97,8 @@ aes_string(
            label.y = min(giraf_data_full$ged)
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-  scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
+  # scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
+  scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
   # facet_wrap(antibody_id ~ antigen_host_order, ncol = 3) +
   facet_wrap( ~ antigen_host_order, ncol = 3) +
   labs(y = "Graph Edit Distance (from EPI242227)",
@@ -138,7 +142,8 @@ aes_string(
            label.y = min(giraf_data_full$ged) + 5
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-  scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
+  # scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
+  scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
   facet_wrap(antibody_id ~ antigen_host_order, ncol = 3, labeller = label_wrap_gen(multi_line=FALSE)) +
   # facet_wrap( ~ antigen_host_order, ncol = 3) +
   labs(y = "Graph Edit Distance (from EPI242227)",
@@ -156,7 +161,8 @@ aes_string(
 
 ### Number of Interfacing Residues plot with all antibodies
 numir_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
-  antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+  # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
+  antigen_host_order %in% c("Primates")
 ),
 aes_string(
   x = "antigen_collection_year",
@@ -179,7 +185,8 @@ aes_string(
            label.y = min(giraf_data_full$num_ir)
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-  scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
+  # scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
+  scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
   # facet_wrap(antibody_id ~ antigen_host_order, ncol = 3) +
   facet_wrap( ~ antigen_host_order, ncol = 3) +
   labs(y = "Number of Interfacing Residues",
@@ -223,7 +230,8 @@ aes_string(
            label.y = min(giraf_data_full$num_ir) + 2
   ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
-  scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
+  # scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
+  scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
   facet_wrap(antibody_id ~ antigen_host_order, ncol = 2, labeller = label_wrap_gen(multi_line=FALSE)) +
   # facet_wrap( ~ antigen_host_order, ncol = 3) +
   labs(y = "Number of Interfacing Residues",
@@ -248,4 +256,5 @@ ggarrange(ged_scatter_plot,
           ncol = 2, nrow = 2, align = "hv")
 
 ## Save plot
-ggsave("../../../figures/giraf_scatter_by_year.pdf", width = 12.75, height = 8.25, units = "in")
+# ggsave("../../../figures/giraf_scatter_by_year.pdf", width = 12.75, height = 8.25, units = "in")
+ggsave("../../../figures/giraf_scatter_by_year_Primates.pdf", width = 8.5, height = 7.5, units = "in")
