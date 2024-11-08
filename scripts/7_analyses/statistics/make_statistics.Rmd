@@ -364,7 +364,7 @@ make_h5_scatter_by_order <- function(y, y_lab){
   plot <- ggplot(data %>% filter(#antigen_collection_year >= 2000,
                                  # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
                                 antigen_host_order %in% c("Primates")
-  ),
+  ) %>% mutate(antigen_host_order = "Humans"),
   aes_string(
     x = "antigen_collection_year",
     y = y,
@@ -448,7 +448,8 @@ scatter_by_year_grid
 
 ```{r}
 # ggsave("../../../figures/scatter_by_year_grid.pdf", width = 11, height = 8.5, units = "in")
-ggsave("../../../figures/scatter_by_year_grid_Primates.pdf", width = 8.5, height = 5.5, units = "in")
+# ggsave("../../../figures/scatter_by_year_grid_Primates.pdf", width = 8.5, height = 5.5, units = "in")
+ggsave("../../../figures/scatter_by_year_grid_Humans.pdf", width = 8.5, height = 5.5, units = "in")
 ```
 
 
