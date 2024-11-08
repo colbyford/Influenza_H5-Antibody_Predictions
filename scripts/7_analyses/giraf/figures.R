@@ -22,8 +22,8 @@ giraf_data <- data.frame(
 ## Read in each GIRAF output and append to 
 for (giraf_path in giraf_paths){
   print(giraf_path)
-  antibody_id = strsplit(strsplit(giraf_path, "//")[[1]][[2]], "__")[[1]][[1]] ## unix
-  # antibody_id = strsplit(strsplit(giraf_path, "/")[[1]][[6]], "__")[[1]][[1]] ## windows
+  # antibody_id = strsplit(strsplit(giraf_path, "//")[[1]][[2]], "__")[[1]][[1]] ## unix
+  antibody_id = strsplit(strsplit(giraf_path, "/")[[1]][[6]], "__")[[1]][[1]] ## windows
   
   giraf_data_iter <- read.csv(giraf_path,
                          sep = "\t",
@@ -75,7 +75,7 @@ numir_correlations <- giraf_data_full %>%
 ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194"),
   # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
   antigen_host_order %in% c("Primates")
-),
+) %>% mutate(antigen_host_order = "Humans"),
 aes_string(
   x = "antigen_collection_year",
   y = "ged",
@@ -120,7 +120,7 @@ aes_string(
 # ),
 ged_scatter_plot_fabs <- ggplot(giraf_data_full %>% 
                                   mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
-                                  filter(comparison %in% c(ged_correlations$comparison)),
+                                  filter(comparison %in% c(ged_correlations$comparison)) %>% mutate(antigen_host_order = "Humans"),
 aes_string(
   x = "antigen_collection_year",
   y = "ged",
@@ -163,7 +163,7 @@ aes_string(
 numir_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
   # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
   antigen_host_order %in% c("Primates")
-),
+) %>% mutate(antigen_host_order = "Humans"),
 aes_string(
   x = "antigen_collection_year",
   y = "num_ir",
@@ -208,7 +208,7 @@ aes_string(
 # ),
 numir_scatter_plot_fabs <- ggplot(giraf_data_full %>% 
                                     mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
-                                    filter(comparison %in% c(numir_correlations$comparison)),
+                                    filter(comparison %in% c(numir_correlations$comparison)) %>% mutate(antigen_host_order = "Humans"),
 aes_string(
   x = "antigen_collection_year",
   y = "num_ir",
@@ -253,8 +253,9 @@ ggarrange(ged_scatter_plot,
           numir_scatter_plot,
           numir_scatter_plot_fabs,
           labels = c("A.", "B.", "C.", "D."),
-          ncol = 2, nrow = 2, align = "hv")
+          ncol = 1, nrow = 4, align = "hv")
 
 ## Save plot
 # ggsave("../../../figures/giraf_scatter_by_year.pdf", width = 12.75, height = 8.25, units = "in")
-ggsave("../../../figures/giraf_scatter_by_year_Primates.pdf", width = 8.5, height = 7.5, units = "in")
+# ggsave("../../../figures/giraf_scatter_by_year_Primates.pdf", width = 8.5, height = 7.5, units = "in")
+ggsave("../../../figures/giraf_scatter_by_year_Humans.pdf", width = 5, height = 14, units = "in")
