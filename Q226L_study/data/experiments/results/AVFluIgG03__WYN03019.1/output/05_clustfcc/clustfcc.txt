@@ -1,0 +1,60 @@
+### clustfcc output ###
+
+Clustering parameters 
+> contact_distance_cutoff=5.0A
+> fraction_cutoff=0.6
+> threshold=10
+> strictness=0.75
+
+Note: Models marked with * represent the center of the cluster
+-----------------------------------------------
+
+Total # of clusters: 3
+
+-----------------------------------------------
+Cluster 1 (#2, n=10, top10_avg_score = -10.94 +-21.88)
+
+clt_rank	model_name	score
+1	flexref_33.pdb	-42.86
+2	flexref_31.pdb	-39.83
+3	flexref_32.pdb	-31.31
+4	flexref_34.pdb	-16.94
+5	flexref_39.pdb	-16.27
+6	flexref_40.pdb	-9.57	*
+7	flexref_36.pdb	1.38
+8	flexref_35.pdb	2.90
+9	flexref_38.pdb	20.83
+10	flexref_37.pdb	22.25
+
+-----------------------------------------------
+Cluster 2 (#1, n=12, top10_avg_score = 34.69 +-17.70)
+
+clt_rank	model_name	score
+1	flexref_3.pdb	7.93
+2	flexref_4.pdb	15.20
+3	flexref_14.pdb	17.68
+4	flexref_20.pdb	24.66
+5	flexref_15.pdb	31.06
+6	flexref_16.pdb	34.98
+7	flexref_6.pdb	45.32
+8	flexref_17.pdb	50.09
+9	flexref_5.pdb	58.57
+10	flexref_18.pdb	61.40
+11	flexref_10.pdb	67.84	*
+12	flexref_7.pdb	76.17
+
+-----------------------------------------------
+Cluster 3 (#3, n=10, top10_avg_score = 57.79 +-20.94)
+
+clt_rank	model_name	score
+1	flexref_22.pdb	19.62
+2	flexref_28.pdb	36.77
+3	flexref_24.pdb	38.45
+4	flexref_27.pdb	50.74
+5	flexref_21.pdb	52.60
+6	flexref_30.pdb	64.65	*
+7	flexref_25.pdb	70.67
+8	flexref_26.pdb	74.27
+9	flexref_29.pdb	79.50
+10	flexref_23.pdb	90.66
+-----------------------------------------------

@@ -1,0 +1,81 @@
+### clustfcc output ###
+
+Clustering parameters 
+> contact_distance_cutoff=5.0A
+> fraction_cutoff=0.6
+> threshold=10
+> strictness=0.75
+
+Note: Models marked with * represent the center of the cluster
+-----------------------------------------------
+
+Total # of clusters: 4
+
+-----------------------------------------------
+Cluster 1 (#1, n=16, top10_avg_score = 99.64 +-17.89)
+
+clt_rank	model_name	score
+1	rigidbody_170.pdb	61.24
+2	rigidbody_30.pdb	84.48
+3	rigidbody_3.pdb	87.98
+4	rigidbody_172.pdb	93.53
+5	rigidbody_94.pdb	95.53
+6	rigidbody_81.pdb	103.15
+7	rigidbody_109.pdb	116.40
+8	rigidbody_122.pdb	117.19
+9	rigidbody_68.pdb	118.26
+10	rigidbody_10.pdb	118.59
+11	rigidbody_176.pdb	118.98	*
+12	rigidbody_42.pdb	122.47
+13	rigidbody_38.pdb	123.66
+14	rigidbody_169.pdb	124.96
+15	rigidbody_135.pdb	126.92
+16	rigidbody_98.pdb	128.63
+
+-----------------------------------------------
+Cluster 2 (#2, n=11, top10_avg_score = 113.91 +-15.32)
+
+clt_rank	model_name	score
+1	rigidbody_160.pdb	84.79
+2	rigidbody_134.pdb	97.81
+3	rigidbody_188.pdb	103.20
+4	rigidbody_22.pdb	103.48
+5	rigidbody_45.pdb	113.24
+6	rigidbody_192.pdb	121.23	*
+7	rigidbody_139.pdb	124.98
+8	rigidbody_52.pdb	125.29
+9	rigidbody_53.pdb	129.57
+10	rigidbody_199.pdb	135.51
+11	rigidbody_6.pdb	167.98
+
+-----------------------------------------------
+Cluster 3 (#4, n=10, top10_avg_score = 113.92 +-8.97)
+
+clt_rank	model_name	score
+1	rigidbody_129.pdb	95.11
+2	rigidbody_116.pdb	109.04
+3	rigidbody_89.pdb	109.94
+4	rigidbody_93.pdb	110.09
+5	rigidbody_173.pdb	114.11
+6	rigidbody_12.pdb	114.31
+7	rigidbody_8.pdb	115.33
+8	rigidbody_200.pdb	117.98	*
+9	rigidbody_83.pdb	121.40
+10	rigidbody_82.pdb	131.85
+
+-----------------------------------------------
+Cluster 4 (#3, n=11, top10_avg_score = 134.69 +-13.96)
+
+clt_rank	model_name	score
+1	rigidbody_193.pdb	106.75
+2	rigidbody_125.pdb	119.46
+3	rigidbody_36.pdb	121.80
+4	rigidbody_148.pdb	131.44
+5	rigidbody_158.pdb	138.09	*
+6	rigidbody_181.pdb	138.28
+7	rigidbody_149.pdb	142.83
+8	rigidbody_132.pdb	147.50
+9	rigidbody_34.pdb	147.86
+10	rigidbody_50.pdb	152.89
+11	rigidbody_155.pdb	158.55
+-----------------------------------------------

@@ -1,0 +1,53 @@
+### clustfcc output ###
+
+Clustering parameters 
+> contact_distance_cutoff=5.0A
+> fraction_cutoff=0.6
+> threshold=10
+> strictness=0.75
+
+Note: Models marked with * represent the center of the cluster
+-----------------------------------------------
+
+Total # of clusters: 2
+
+-----------------------------------------------
+Cluster 1 (#1, n=18, top10_avg_score = 82.87 +-5.62)
+
+clt_rank	model_name	score
+1	rigidbody_19.pdb	75.42
+2	rigidbody_66.pdb	76.17
+3	rigidbody_3.pdb	78.41
+4	rigidbody_164.pdb	78.82	*
+5	rigidbody_102.pdb	82.13
+6	rigidbody_151.pdb	83.11
+7	rigidbody_87.pdb	85.00
+8	rigidbody_106.pdb	86.56
+9	rigidbody_172.pdb	89.22
+10	rigidbody_167.pdb	93.85
+11	rigidbody_162.pdb	94.31
+12	rigidbody_8.pdb	94.59
+13	rigidbody_157.pdb	98.61
+14	rigidbody_72.pdb	107.70
+15	rigidbody_133.pdb	112.25
+16	rigidbody_187.pdb	119.91
+17	rigidbody_169.pdb	121.08
+18	rigidbody_59.pdb	121.57
+
+-----------------------------------------------
+Cluster 2 (#2, n=12, top10_avg_score = 86.85 +-5.79)
+
+clt_rank	model_name	score
+1	rigidbody_148.pdb	77.06
+2	rigidbody_41.pdb	80.90
+3	rigidbody_75.pdb	83.77
+4	rigidbody_182.pdb	84.10	*
+5	rigidbody_80.pdb	84.56
+6	rigidbody_46.pdb	87.31
+7	rigidbody_128.pdb	88.27
+8	rigidbody_24.pdb	91.49
+9	rigidbody_27.pdb	93.60
+10	rigidbody_188.pdb	97.46
+11	rigidbody_73.pdb	100.76
+12	rigidbody_54.pdb	110.24
+-----------------------------------------------

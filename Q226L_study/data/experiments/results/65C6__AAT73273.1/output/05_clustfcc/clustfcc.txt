@@ -1,0 +1,88 @@
+### clustfcc output ###
+
+Clustering parameters 
+> contact_distance_cutoff=5.0A
+> fraction_cutoff=0.6
+> threshold=10
+> strictness=0.75
+
+Note: Models marked with * represent the center of the cluster
+-----------------------------------------------
+
+Total # of clusters: 5
+
+-----------------------------------------------
+Cluster 1 (#2, n=10, top10_avg_score = -108.65 +-30.33)
+
+clt_rank	model_name	score
+1	flexref_32.pdb	-168.02
+2	flexref_31.pdb	-144.67
+3	flexref_34.pdb	-133.80
+4	flexref_33.pdb	-109.80
+5	flexref_36.pdb	-107.76
+6	flexref_39.pdb	-104.90
+7	flexref_35.pdb	-92.40
+8	flexref_38.pdb	-80.53
+9	flexref_37.pdb	-76.25
+10	flexref_40.pdb	-68.33	*
+
+-----------------------------------------------
+Cluster 2 (#1, n=10, top10_avg_score = -80.93 +-36.11)
+
+clt_rank	model_name	score
+1	flexref_41.pdb	-150.93
+2	flexref_50.pdb	-116.73	*
+3	flexref_45.pdb	-97.33
+4	flexref_43.pdb	-92.14
+5	flexref_48.pdb	-90.53
+6	flexref_42.pdb	-75.05
+7	flexref_47.pdb	-63.46
+8	flexref_44.pdb	-57.99
+9	flexref_46.pdb	-52.88
+10	flexref_49.pdb	-12.27
+
+-----------------------------------------------
+Cluster 3 (#3, n=10, top10_avg_score = -80.56 +-17.94)
+
+clt_rank	model_name	score
+1	flexref_24.pdb	-99.47
+2	flexref_27.pdb	-93.30
+3	flexref_22.pdb	-93.24
+4	flexref_21.pdb	-92.02
+5	flexref_28.pdb	-87.66
+6	flexref_30.pdb	-85.38
+7	flexref_26.pdb	-79.99	*
+8	flexref_29.pdb	-76.04
+9	flexref_25.pdb	-62.45
+10	flexref_23.pdb	-36.00
+
+-----------------------------------------------
+Cluster 4 (#5, n=10, top10_avg_score = -60.56 +-19.86)
+
+clt_rank	model_name	score
+1	flexref_3.pdb	-90.33
+2	flexref_2.pdb	-78.25
+3	flexref_4.pdb	-75.78
+4	flexref_5.pdb	-69.41
+5	flexref_7.pdb	-69.29
+6	flexref_1.pdb	-61.52
+7	flexref_6.pdb	-58.36
+8	flexref_9.pdb	-43.32
+9	flexref_10.pdb	-38.32	*
+10	flexref_8.pdb	-21.02
+
+-----------------------------------------------
+Cluster 5 (#4, n=10, top10_avg_score = -48.98 +-32.26)
+
+clt_rank	model_name	score
+1	flexref_14.pdb	-113.39
+2	flexref_16.pdb	-87.01
+3	flexref_15.pdb	-62.88
+4	flexref_12.pdb	-62.52
+5	flexref_20.pdb	-54.22
+6	flexref_18.pdb	-36.52
+7	flexref_11.pdb	-33.37
+8	flexref_13.pdb	-21.74
+9	flexref_17.pdb	-15.56	*
+10	flexref_19.pdb	-2.63
+-----------------------------------------------
