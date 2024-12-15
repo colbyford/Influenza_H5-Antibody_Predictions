@@ -1,0 +1,75 @@
+### clustfcc output ###
+
+Clustering parameters 
+> contact_distance_cutoff=5.0A
+> fraction_cutoff=0.6
+> threshold=10
+> strictness=0.75
+
+Note: Models marked with * represent the center of the cluster
+-----------------------------------------------
+
+Total # of clusters: 3
+
+-----------------------------------------------
+Cluster 1 (#2, n=11, top10_avg_score = 105.67 +-18.86)
+
+clt_rank	model_name	score
+1	rigidbody_137.pdb	75.51
+2	rigidbody_177.pdb	79.32
+3	rigidbody_1.pdb	94.47
+4	rigidbody_172.pdb	101.18
+5	rigidbody_190.pdb	103.66
+6	rigidbody_89.pdb	108.23
+7	rigidbody_166.pdb	109.72
+8	rigidbody_192.pdb	115.15	*
+9	rigidbody_118.pdb	134.62
+10	rigidbody_189.pdb	134.87
+11	rigidbody_55.pdb	137.76
+
+-----------------------------------------------
+Cluster 2 (#1, n=26, top10_avg_score = 106.38 +-5.81)
+
+clt_rank	model_name	score
+1	rigidbody_196.pdb	99.15	*
+2	rigidbody_120.pdb	99.63
+3	rigidbody_66.pdb	100.30
+4	rigidbody_62.pdb	103.62
+5	rigidbody_125.pdb	103.67
+6	rigidbody_159.pdb	106.78
+7	rigidbody_5.pdb	108.46
+8	rigidbody_93.pdb	112.24
+9	rigidbody_161.pdb	114.61
+10	rigidbody_150.pdb	115.38
+11	rigidbody_51.pdb	118.46
+12	rigidbody_100.pdb	119.80
+13	rigidbody_40.pdb	121.16
+14	rigidbody_162.pdb	122.61
+15	rigidbody_46.pdb	122.92
+16	rigidbody_186.pdb	125.03
+17	rigidbody_139.pdb	125.87
+18	rigidbody_113.pdb	131.45
+19	rigidbody_27.pdb	135.49
+20	rigidbody_78.pdb	135.91
+21	rigidbody_114.pdb	136.53
+22	rigidbody_44.pdb	137.23
+23	rigidbody_180.pdb	141.36
+24	rigidbody_191.pdb	145.86
+25	rigidbody_105.pdb	149.57
+26	rigidbody_39.pdb	153.16
+
+-----------------------------------------------
+Cluster 3 (#3, n=10, top10_avg_score = 107.56 +-18.83)
+
+clt_rank	model_name	score
+1	rigidbody_106.pdb	83.36
+2	rigidbody_25.pdb	92.38
+3	rigidbody_12.pdb	97.37
+4	rigidbody_53.pdb	100.27
+5	rigidbody_4.pdb	102.20
+6	rigidbody_157.pdb	106.95
+7	rigidbody_91.pdb	107.24	*
+8	rigidbody_24.pdb	109.62
+9	rigidbody_14.pdb	119.75
+10	rigidbody_98.pdb	156.45
+-----------------------------------------------
