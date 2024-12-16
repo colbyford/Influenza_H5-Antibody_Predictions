@@ -1,0 +1,1230 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20221.22.0415.1144                               -->
+<workbook original-version='18.1' source-build='2022.1.1 (20221.22.0415.1144)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <_.fcp.AnimationOnByDefault.false...style>
+    <_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule element='animation'>
+      <_.fcp.AnimationOnByDefault.false...format attr='animation-on' value='ao-on' />
+    </_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule>
+  </_.fcp.AnimationOnByDefault.false...style>
+  <datasources>
+    <datasource caption='Experiments (Experiments)' inline='true' name='federated.025gb0o1snjdg1147j98l1xi9ooy' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Experiments' name='excel-direct.074zjd70fvzd1r14rknqg0l3727a'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/Colby/Documents/GitHub/H5_influenza_antibody_modeling/Q226L_study/Experiments.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='excel-direct.074zjd70fvzd1r14rknqg0l3727a' name='Experiments' table='[Experiments$]' type='table'>
+          <columns gridOrigin='A1:AJ34:no:A1:AJ34:0' header='yes' outcome='2'>
+            <column datatype='string' name='experiment_id' ordinal='0' />
+            <column datatype='string' name='antibody_id' ordinal='1' />
+            <column datatype='string' name='antigen_id' ordinal='2' />
+            <column datatype='boolean' name='submitted' ordinal='3' />
+            <column datatype='boolean' name='complete' ordinal='4' />
+            <column datatype='string' name='best_model_name' ordinal='5' />
+            <column datatype='real' name='bsa_best' ordinal='6' />
+            <column datatype='real' name='bsa_max' ordinal='7' />
+            <column datatype='real' name='bsa_mean' ordinal='8' />
+            <column datatype='real' name='bsa_min' ordinal='9' />
+            <column datatype='real' name='bsa_std' ordinal='10' />
+            <column datatype='real' name='desolv_best' ordinal='11' />
+            <column datatype='real' name='desolv_max' ordinal='12' />
+            <column datatype='real' name='desolv_mean' ordinal='13' />
+            <column datatype='real' name='desolv_min' ordinal='14' />
+            <column datatype='real' name='desolv_std' ordinal='15' />
+            <column datatype='real' name='elec_best' ordinal='16' />
+            <column datatype='real' name='elec_max' ordinal='17' />
+            <column datatype='real' name='elec_mean' ordinal='18' />
+            <column datatype='real' name='elec_min' ordinal='19' />
+            <column datatype='real' name='elec_std' ordinal='20' />
+            <column datatype='real' name='haddock_score_best' ordinal='21' />
+            <column datatype='real' name='haddock_score_max' ordinal='22' />
+            <column datatype='real' name='haddock_score_mean' ordinal='23' />
+            <column datatype='real' name='haddock_score_min' ordinal='24' />
+            <column datatype='real' name='haddock_score_std' ordinal='25' />
+            <column datatype='real' name='total_best' ordinal='26' />
+            <column datatype='real' name='total_max' ordinal='27' />
+            <column datatype='real' name='total_mean' ordinal='28' />
+            <column datatype='real' name='total_min' ordinal='29' />
+            <column datatype='real' name='total_std' ordinal='30' />
+            <column datatype='real' name='vdw_best' ordinal='31' />
+            <column datatype='real' name='vdw_max' ordinal='32' />
+            <column datatype='real' name='vdw_mean' ordinal='33' />
+            <column datatype='real' name='vdw_min' ordinal='34' />
+            <column datatype='real' name='vdw_std' ordinal='35' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='excel-direct.074zjd70fvzd1r14rknqg0l3727a' name='Experiments' table='[Experiments$]' type='table'>
+          <columns gridOrigin='A1:AJ34:no:A1:AJ34:0' header='yes' outcome='2'>
+            <column datatype='string' name='experiment_id' ordinal='0' />
+            <column datatype='string' name='antibody_id' ordinal='1' />
+            <column datatype='string' name='antigen_id' ordinal='2' />
+            <column datatype='boolean' name='submitted' ordinal='3' />
+            <column datatype='boolean' name='complete' ordinal='4' />
+            <column datatype='string' name='best_model_name' ordinal='5' />
+            <column datatype='real' name='bsa_best' ordinal='6' />
+            <column datatype='real' name='bsa_max' ordinal='7' />
+            <column datatype='real' name='bsa_mean' ordinal='8' />
+            <column datatype='real' name='bsa_min' ordinal='9' />
+            <column datatype='real' name='bsa_std' ordinal='10' />
+            <column datatype='real' name='desolv_best' ordinal='11' />
+            <column datatype='real' name='desolv_max' ordinal='12' />
+            <column datatype='real' name='desolv_mean' ordinal='13' />
+            <column datatype='real' name='desolv_min' ordinal='14' />
+            <column datatype='real' name='desolv_std' ordinal='15' />
+            <column datatype='real' name='elec_best' ordinal='16' />
+            <column datatype='real' name='elec_max' ordinal='17' />
+            <column datatype='real' name='elec_mean' ordinal='18' />
+            <column datatype='real' name='elec_min' ordinal='19' />
+            <column datatype='real' name='elec_std' ordinal='20' />
+            <column datatype='real' name='haddock_score_best' ordinal='21' />
+            <column datatype='real' name='haddock_score_max' ordinal='22' />
+            <column datatype='real' name='haddock_score_mean' ordinal='23' />
+            <column datatype='real' name='haddock_score_min' ordinal='24' />
+            <column datatype='real' name='haddock_score_std' ordinal='25' />
+            <column datatype='real' name='total_best' ordinal='26' />
+            <column datatype='real' name='total_max' ordinal='27' />
+            <column datatype='real' name='total_mean' ordinal='28' />
+            <column datatype='real' name='total_min' ordinal='29' />
+            <column datatype='real' name='total_std' ordinal='30' />
+            <column datatype='real' name='vdw_best' ordinal='31' />
+            <column datatype='real' name='vdw_max' ordinal='32' />
+            <column datatype='real' name='vdw_mean' ordinal='33' />
+            <column datatype='real' name='vdw_min' ordinal='34' />
+            <column datatype='real' name='vdw_std' ordinal='35' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:AJ34:no:A1:AJ34:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>2</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>experiment_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[experiment_id]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>experiment_id</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>antibody_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[antibody_id]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>antibody_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>antigen_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[antigen_id]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>antigen_id</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>submitted</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[submitted]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>submitted</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WINBOOL&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>complete</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[complete]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>complete</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WINBOOL&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>best_model_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[best_model_name]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>best_model_name</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bsa_best</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bsa_best]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>bsa_best</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bsa_max</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bsa_max]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>bsa_max</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bsa_mean</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bsa_mean]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>bsa_mean</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bsa_min</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bsa_min]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>bsa_min</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bsa_std</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bsa_std]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>bsa_std</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>desolv_best</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[desolv_best]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>desolv_best</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>desolv_max</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[desolv_max]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>desolv_max</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>desolv_mean</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[desolv_mean]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>desolv_mean</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>desolv_min</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[desolv_min]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>desolv_min</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>desolv_std</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[desolv_std]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>desolv_std</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>elec_best</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[elec_best]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>elec_best</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>elec_max</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[elec_max]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>elec_max</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>elec_mean</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[elec_mean]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>elec_mean</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>elec_min</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[elec_min]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>elec_min</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>elec_std</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[elec_std]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>elec_std</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>haddock_score_best</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[haddock_score_best]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>haddock_score_best</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>haddock_score_max</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[haddock_score_max]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>haddock_score_max</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>haddock_score_mean</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[haddock_score_mean]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>haddock_score_mean</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>haddock_score_min</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[haddock_score_min]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>haddock_score_min</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>haddock_score_std</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[haddock_score_std]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>haddock_score_std</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_best</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_best]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>total_best</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_max</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_max]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>total_max</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_mean</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_mean]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>total_mean</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_min</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_min]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>total_min</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_std</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_std]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>total_std</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>vdw_best</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[vdw_best]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>vdw_best</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>vdw_max</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[vdw_max]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>vdw_max</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>vdw_mean</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[vdw_mean]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>vdw_mean</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>vdw_min</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[vdw_min]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>vdw_min</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>vdw_std</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[vdw_std]</local-name>
+            <parent-name>[Experiments]</parent-name>
+            <remote-alias>vdw_std</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Experiments_172EDA1AB0594594ACA25AA9888482E0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <_.fcp.ObjectModelTableType.true...column caption='Experiments' datatype='table' name='[__tableau_internal_object_id__].[Experiments_172EDA1AB0594594ACA25AA9888482E0]' role='measure' type='quantitative' />
+      <column caption='Antibody Id' datatype='string' name='[antibody_id]' role='dimension' type='nominal' />
+      <column caption='Antigen ID' datatype='string' name='[antigen_id]' role='dimension' type='nominal'>
+        <aliases>
+          <alias key='&quot;AAT73273.1&quot;' value='AAT73273.1 (Vietnam 2004)' />
+          <alias key='&quot;WYN03019.1&quot;' value='WYN03019.1 (Texas 2024)' />
+          <alias key='&quot;YP_308669.1&quot;' value='YP_308669.1 (China 1996)' />
+        </aliases>
+      </column>
+      <column caption='Best Model Name' datatype='string' name='[best_model_name]' role='dimension' type='nominal' />
+      <column caption='Bsa Best' datatype='real' name='[bsa_best]' role='measure' type='quantitative' />
+      <column caption='Bsa Max' datatype='real' name='[bsa_max]' role='measure' type='quantitative' />
+      <column caption='Bsa Mean' datatype='real' name='[bsa_mean]' role='measure' type='quantitative' />
+      <column caption='Bsa Min' datatype='real' name='[bsa_min]' role='measure' type='quantitative' />
+      <column caption='Bsa Std' datatype='real' name='[bsa_std]' role='measure' type='quantitative' />
+      <column caption='Complete' datatype='boolean' name='[complete]' role='dimension' type='nominal' />
+      <column caption='Desolv Best' datatype='real' name='[desolv_best]' role='measure' type='quantitative' />
+      <column caption='Desolv Max' datatype='real' name='[desolv_max]' role='measure' type='quantitative' />
+      <column caption='Desolv Mean' datatype='real' name='[desolv_mean]' role='measure' type='quantitative' />
+      <column caption='Desolv Min' datatype='real' name='[desolv_min]' role='measure' type='quantitative' />
+      <column caption='Desolv Std' datatype='real' name='[desolv_std]' role='measure' type='quantitative' />
+      <column caption='Elec Best' datatype='real' name='[elec_best]' role='measure' type='quantitative' />
+      <column caption='Elec Max' datatype='real' name='[elec_max]' role='measure' type='quantitative' />
+      <column caption='Elec Mean' datatype='real' name='[elec_mean]' role='measure' type='quantitative' />
+      <column caption='Elec Min' datatype='real' name='[elec_min]' role='measure' type='quantitative' />
+      <column caption='Elec Std' datatype='real' name='[elec_std]' role='measure' type='quantitative' />
+      <column caption='Experiment Id' datatype='string' name='[experiment_id]' role='dimension' type='nominal' />
+      <column caption='Haddock Score Best' datatype='real' name='[haddock_score_best]' role='measure' type='quantitative' />
+      <column caption='Haddock Score Max' datatype='real' name='[haddock_score_max]' role='measure' type='quantitative' />
+      <column caption='Haddock Score Mean' datatype='real' name='[haddock_score_mean]' role='measure' type='quantitative' />
+      <column caption='Haddock Score Min' datatype='real' name='[haddock_score_min]' role='measure' type='quantitative' />
+      <column caption='Haddock Score Std' datatype='real' name='[haddock_score_std]' role='measure' type='quantitative' />
+      <column caption='Submitted' datatype='boolean' name='[submitted]' role='dimension' type='nominal' />
+      <column caption='Total Best' datatype='real' name='[total_best]' role='measure' type='quantitative' />
+      <column caption='Total Max' datatype='real' name='[total_max]' role='measure' type='quantitative' />
+      <column caption='Total Mean' datatype='real' name='[total_mean]' role='measure' type='quantitative' />
+      <column caption='Total Min' datatype='real' name='[total_min]' role='measure' type='quantitative' />
+      <column caption='Total Std' datatype='real' name='[total_std]' role='measure' type='quantitative' />
+      <column caption='Vdw Best' datatype='real' name='[vdw_best]' role='measure' type='quantitative' />
+      <column caption='Vdw Max' datatype='real' name='[vdw_max]' role='measure' type='quantitative' />
+      <column caption='Vdw Mean' datatype='real' name='[vdw_mean]' role='measure' type='quantitative' />
+      <column caption='Vdw Min' datatype='real' name='[vdw_min]' role='measure' type='quantitative' />
+      <column caption='Vdw Std' datatype='real' name='[vdw_std]' role='measure' type='quantitative' />
+      <column-instance column='[antigen_id]' derivation='None' name='[none:antigen_id:nk]' pivot='key' type='nominal' />
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-aliased-fields='true' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:antigen_id:nk]' type='palette'>
+            <map to='#005035'>
+              <bucket>&quot;YP_308669.1&quot;</bucket>
+            </map>
+            <map to='#a49665'>
+              <bucket>&quot;AAT73273.1&quot;</bucket>
+            </map>
+            <map to='#df4661'>
+              <bucket>&quot;WYN03019.1&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='Experiments' id='Experiments_172EDA1AB0594594ACA25AA9888482E0'>
+            <properties context=''>
+              <relation connection='excel-direct.074zjd70fvzd1r14rknqg0l3727a' name='Experiments' table='[Experiments$]' type='table'>
+                <columns gridOrigin='A1:AJ34:no:A1:AJ34:0' header='yes' outcome='2'>
+                  <column datatype='string' name='experiment_id' ordinal='0' />
+                  <column datatype='string' name='antibody_id' ordinal='1' />
+                  <column datatype='string' name='antigen_id' ordinal='2' />
+                  <column datatype='boolean' name='submitted' ordinal='3' />
+                  <column datatype='boolean' name='complete' ordinal='4' />
+                  <column datatype='string' name='best_model_name' ordinal='5' />
+                  <column datatype='real' name='bsa_best' ordinal='6' />
+                  <column datatype='real' name='bsa_max' ordinal='7' />
+                  <column datatype='real' name='bsa_mean' ordinal='8' />
+                  <column datatype='real' name='bsa_min' ordinal='9' />
+                  <column datatype='real' name='bsa_std' ordinal='10' />
+                  <column datatype='real' name='desolv_best' ordinal='11' />
+                  <column datatype='real' name='desolv_max' ordinal='12' />
+                  <column datatype='real' name='desolv_mean' ordinal='13' />
+                  <column datatype='real' name='desolv_min' ordinal='14' />
+                  <column datatype='real' name='desolv_std' ordinal='15' />
+                  <column datatype='real' name='elec_best' ordinal='16' />
+                  <column datatype='real' name='elec_max' ordinal='17' />
+                  <column datatype='real' name='elec_mean' ordinal='18' />
+                  <column datatype='real' name='elec_min' ordinal='19' />
+                  <column datatype='real' name='elec_std' ordinal='20' />
+                  <column datatype='real' name='haddock_score_best' ordinal='21' />
+                  <column datatype='real' name='haddock_score_max' ordinal='22' />
+                  <column datatype='real' name='haddock_score_mean' ordinal='23' />
+                  <column datatype='real' name='haddock_score_min' ordinal='24' />
+                  <column datatype='real' name='haddock_score_std' ordinal='25' />
+                  <column datatype='real' name='total_best' ordinal='26' />
+                  <column datatype='real' name='total_max' ordinal='27' />
+                  <column datatype='real' name='total_mean' ordinal='28' />
+                  <column datatype='real' name='total_min' ordinal='29' />
+                  <column datatype='real' name='total_std' ordinal='30' />
+                  <column datatype='real' name='vdw_best' ordinal='31' />
+                  <column datatype='real' name='vdw_max' ordinal='32' />
+                  <column datatype='real' name='vdw_mean' ordinal='33' />
+                  <column datatype='real' name='vdw_min' ordinal='34' />
+                  <column datatype='real' name='vdw_std' ordinal='35' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Mean Boxplots'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Experiments (Experiments)' name='federated.025gb0o1snjdg1147j98l1xi9ooy' />
+          </datasources>
+          <datasource-dependencies datasource='federated.025gb0o1snjdg1147j98l1xi9ooy'>
+            <column caption='Antibody Id' datatype='string' name='[antibody_id]' role='dimension' type='nominal' />
+            <column caption='Antigen ID' datatype='string' name='[antigen_id]' role='dimension' type='nominal'>
+              <aliases>
+                <alias key='&quot;AAT73273.1&quot;' value='AAT73273.1 (Vietnam 2004)' />
+                <alias key='&quot;WYN03019.1&quot;' value='WYN03019.1 (Texas 2024)' />
+                <alias key='&quot;YP_308669.1&quot;' value='YP_308669.1 (China 1996)' />
+              </aliases>
+            </column>
+            <column caption='Bsa Mean' datatype='real' name='[bsa_mean]' role='measure' type='quantitative' />
+            <column caption='Elec Mean' datatype='real' name='[elec_mean]' role='measure' type='quantitative' />
+            <column caption='Haddock Score Mean' datatype='real' name='[haddock_score_mean]' role='measure' type='quantitative' />
+            <column-instance column='[antibody_id]' derivation='None' name='[none:antibody_id:nk]' pivot='key' type='nominal' />
+            <column-instance column='[antigen_id]' derivation='None' name='[none:antigen_id:nk]' pivot='key' type='nominal' />
+            <column-instance column='[bsa_mean]' derivation='None' name='[none:bsa_mean:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[elec_mean]' derivation='None' name='[none:elec_mean:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[haddock_score_mean]' derivation='None' name='[none:haddock_score_mean:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[total_mean]' derivation='None' name='[none:total_mean:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[vdw_mean]' derivation='None' name='[none:vdw_mean:qk]' pivot='key' type='quantitative' />
+            <column caption='Total Mean' datatype='real' name='[total_mean]' role='measure' type='quantitative' />
+            <column caption='Vdw Mean' datatype='real' name='[vdw_mean]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <manual-sort column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;YP_308669.1&quot;</bucket>
+              <bucket>&quot;AAT73273.1&quot;</bucket>
+              <bucket>&quot;WYN03019.1&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='quantitative' column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]' included-values='non-null' />
+          <slices>
+            <column>[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]' field-type='quantitative' scope='cols' type='space' />
+            <format attr='title' class='0' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:total_mean:qk]' scope='cols' value='Total Score' />
+            <format attr='title' class='0' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:haddock_score_mean:qk]' scope='cols' value='HADDOCK Score' />
+            <format attr='title' class='0' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:vdw_mean:qk]' scope='cols' value='Van der Waals Energy' />
+            <format attr='title' class='0' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:elec_mean:qk]' scope='cols' value='Electrostatic Energy' />
+            <format attr='title' class='0' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]' scope='cols' value='Buried Surface Area' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='height' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' value='90' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' value='108' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' />
+              <lod column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antibody_id:nk]' />
+            </encodings>
+            <reference-line axis-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:haddock_score_mean:qk]' boxplot-mark-exclusion='false' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline0' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:haddock_score_mean:qk]' z-order='1' />
+            <reference-line axis-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]' boxplot-mark-exclusion='false' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline1' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]' z-order='2' />
+            <reference-line axis-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:elec_mean:qk]' boxplot-mark-exclusion='false' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline2' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:elec_mean:qk]' z-order='3' />
+            <reference-line axis-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:total_mean:qk]' boxplot-mark-exclusion='false' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline3' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:total_mean:qk]' z-order='4' />
+            <reference-line axis-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:vdw_mean:qk]' boxplot-mark-exclusion='false' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline4' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:vdw_mean:qk]' z-order='5' />
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:haddock_score_mean:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' />
+              <lod column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antibody_id:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.38381215929985046' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' />
+              <lod column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antibody_id:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.38381215929985046' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:elec_mean:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' />
+              <lod column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antibody_id:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.38381215929985046' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:total_mean:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' />
+              <lod column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antibody_id:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.38381215929985046' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:vdw_mean:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' />
+              <lod column='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antibody_id:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.38381215929985046' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]</rows>
+        <cols>([federated.025gb0o1snjdg1147j98l1xi9ooy].[none:haddock_score_mean:qk] + ([federated.025gb0o1snjdg1147j98l1xi9ooy].[none:total_mean:qk] + ([federated.025gb0o1snjdg1147j98l1xi9ooy].[none:vdw_mean:qk] + ([federated.025gb0o1snjdg1147j98l1xi9ooy].[none:elec_mean:qk] + [federated.025gb0o1snjdg1147j98l1xi9ooy].[none:bsa_mean:qk]))))</cols>
+      </table>
+      <simple-id uuid='{2B7C7F4E-DBF3-44E2-82F2-A723F8ECC957}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Mean Boxplots'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antibody_id:nk]</field>
+            <field>[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:antigen_id:nk]</field>
+            <field>[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:elec_best:qk]</field>
+            <field>[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:total_best:qk]</field>
+            <field>[federated.025gb0o1snjdg1147j98l1xi9ooy].[none:vdw_best:qk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{C2F9871A-ED69-47E0-BC08-16F8584CF157}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Mean Boxplots' width='192'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
