@@ -1,0 +1,173 @@
+# Make Statistics and Figures
+
+```{r}
+## Tidyverse Stuff
+library(dplyr)
+library(tidyr)
+library(forcats)
+library(readxl)
+
+## Plotting Libraries
+library(ggplot2)
+library(ggpubr)
+library(ggExtra)
+library(ggdendroplot)
+library(ggsci)
+
+alpha = 0.05
+```
+
+## Load in Data
+
+```{r}
+experiments <- read_excel("../../../Experiments.xlsx", sheet = "Experiments")
+antibodies <- read_excel("../../../Experiments.xlsx", sheet = "Antibodies")
+antigens <- read_excel("../../../Experiments.xlsx", sheet = "Antigens")
+
+## Exclude lab-derived isolate clusters
+exclusions <- c("EPI243001", "EPI287236", "EPI359214")
+
+data <- experiments %>% 
+  left_join(antibodies, by="antibody_id") %>% 
+  left_join(antigens, by="antigen_id") %>% 
+  filter(!antigen_id %in% exclusions)
+```
+
+## Define UNCC Color Palette
+```{r}
+uncc_colors <- c(
+  ## All in C colors
+  "#005035", ## Charlotte Green
+  "#A49665", ## Niner Gold
+  "#F1E6B2", ## Jasper
+  "#899064", ## Pine Green
+  "#802F2D", ## Clay Red
+  "#007377",  ## Sky Blue
+  
+  ## Others
+  "#717C7D", ## 444C (Grey)
+  "#72246C", ## 255C (Purple)
+  "#006BA6", ## 307C (Blue)
+  "#DF4661", ## 198C
+  "#FFB81C", ## 1235C
+  "#696158"  ## 405C
+  
+)
+```
+
+## Create Boxplots
+
+### Antibody Performance
+
+#### Setup Comparisons to Perform
+
+```{r}
+# get_sig_plot_comparisons <- function(y, alpha){
+#   ## Create Boxplots of metrics by antigen
+#   plot_comparisons <- combn(unique(data$antibody_id), 2, simplify = FALSE)
+#   
+#   ## perform wilcox test on plot_comparisons
+#   wilcox_results <- lapply(plot_comparisons, function(x) {
+#     wilcox.test(data %>% 
+#                   filter(antibody_id %in% x) %>% 
+#                   pull(y) ~ data %>% 
+#                   filter(antibody_id %in% x) %>% 
+#                   pull(antibody_id))
+#   })
+#   
+#   ## Filter to significant
+#   sig_plot_comparisons <- plot_comparisons[sapply(wilcox_results,
+#                                                   function(x) x$p.value < alpha)]
+#   
+#   return(sig_plot_comparisons)
+# }
+
+## Create Boxplots of metrics by antigen
+plot_comparisons <- combn(unique(data$antigen_id), 2, simplify = FALSE)
+
+## perform wilcox test on plot_comparisons
+wilcox_results <- lapply(plot_comparisons, function(x) {
+  wilcox.test(data %>%
+                filter(antigen_id %in% x) %>%
+                pull("vdw_mean") ~ data %>%
+                filter(antigen_id %in% x) %>%
+                pull(antigen_id))
+})
+
+## Filter to significant
+sig_plot_comparisons <- plot_comparisons[sapply(wilcox_results,
+                                                function(x) x$p.value < alpha)]
+```
+
+#### General Plot Function
+
+```{r}
+make_h5_boxplot_by_antigen <- function(y, y_lab){
+  plot <- ggplot(data, 
+                 aes_string(
+                   x = "antigen_id",
+                   y = y,
+                   fill = "antigen_id"
+                 )) + 
+    geom_violin() +
+    geom_boxplot(width=0.25, fill = "white", color = "black", outlier.size = 2, notch = FALSE) +
+    stat_compare_means(comparisons = plot_comparisons) +
+    labs(y = y_lab,
+         x = 'Antigen',
+         color = "Antigen") +
+    scale_fill_manual(values = uncc_colors) +
+    theme_linedraw() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+          line = element_line(colour = "grey"),
+          axis.line = element_line(color = "grey"),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(color = "grey"),
+          legend.position = "none"
+    )
+  
+  return(plot)
+}
+```
+
+```{r}
+## van der Waals Energy
+boxplot_vdw_by_antigen <- make_h5_boxplot_by_antigen(y = "vdw_mean", y_lab = "Mean van der Waals Energy" )
+
+## Electrostatic Energy
+boxplot_elec_by_antigen <- make_h5_boxplot_by_antigen(y = "elec_mean", y_lab = "Mean Electrostatic Energy")
+
+## Desolvation Energy
+boxplot_desolv_by_antigen <- make_h5_boxplot_by_antigen(y = "desolv_mean", y_lab = "Mean Desolvation Energy")
+
+## Buried Surface Area
+boxplot_bsa_by_antigen <- make_h5_boxplot_by_antigen(y = "bsa_mean", y_lab = "Mean Buried Surface Area")
+
+## HADDOCK Score
+boxplot_haddock_by_antigen <- make_h5_boxplot_by_antigen(y = "haddock_score_mean", y_lab = "Mean HADDOCK Score")
+
+## Total Score
+boxplot_total_by_antigen <- make_h5_boxplot_by_antigen(y = "total_mean", y_lab = "Mean Total Energy")
+```
+
+#### Place on single plot
+
+```{r}
+boxplots_by_antigen_grid = ggarrange(boxplot_vdw_by_antigen,
+                                 boxplot_elec_by_antigen,
+                                 boxplot_desolv_by_antigen,
+                                 boxplot_bsa_by_antigen,
+                                 boxplot_haddock_by_antigen,
+                                 boxplot_total_by_antigen,
+                                 labels = c("A.", "B.", "C.", "D.", "E.", "F."),
+                                 ncol = 3, nrow = 2)
+
+boxplots_by_antigen_grid
+```
+
+```{r}
+ggsave("../../../figures/boxplots_by_antibody_grid.pdf", width = 16.5, height = 12.75, units = "in")
+```
+
+
+
+
