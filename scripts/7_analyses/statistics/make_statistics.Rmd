@@ -92,11 +92,17 @@ make_h5_boxplot_by_antibody <- function(y, y_lab){
     geom_violin() +
     geom_boxplot(width=0.25, fill = "white", color = "black", outlier.size = 2, notch = TRUE) +
     stat_compare_means() +
+    annotate("text",
+             x = 11,
+             y = min(data[[y]]),
+             label = paste("n = ", nrow(data))
+             ) +
     labs(y = y_lab,
          x = 'Antibody',
          color = "Antibody") +
     scale_fill_manual(values = uncc_colors) +
     theme_linedraw() +
+    theme_minimal() +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
           line = element_line(colour = "grey"),
           axis.line = element_line(color = "grey"),
@@ -111,22 +117,22 @@ make_h5_boxplot_by_antibody <- function(y, y_lab){
 
 ```{r}
 ## van der Waals Energy
-boxplot_vdw_by_antibody <- make_h5_boxplot_by_antibody(y = "vdw_mean", y_lab = "Mean van der Waals Energy" )
+boxplot_vdw_by_antibody <- make_h5_boxplot_by_antibody(y = "vdw_mean", y_lab = "◀ Van der Waals Energy" )
 
 ## Electrostatic Energy
-boxplot_elec_by_antibody <- make_h5_boxplot_by_antibody(y = "elec_mean", y_lab = "Mean Electrostatic Energy")
+boxplot_elec_by_antibody <- make_h5_boxplot_by_antibody(y = "elec_mean", y_lab = "◀ Electrostatic Energy")
 
 ## Desolvation Energy
-boxplot_desolv_by_antibody <- make_h5_boxplot_by_antibody(y = "desolv_mean", y_lab = "Mean Desolvation Energy")
+boxplot_desolv_by_antibody <- make_h5_boxplot_by_antibody(y = "desolv_mean", y_lab = "◀ Desolvation Energy")
 
 ## Buried Surface Area
-boxplot_bsa_by_antibody <- make_h5_boxplot_by_antibody(y = "bsa_mean", y_lab = "Mean Buried Surface Area")
+boxplot_bsa_by_antibody <- make_h5_boxplot_by_antibody(y = "bsa_mean", y_lab = "Buried Surface Area ▶")
 
 ## HADDOCK Score
-boxplot_haddock_by_antibody <- make_h5_boxplot_by_antibody(y = "haddock_score_mean", y_lab = "Mean HADDOCK Score")
+boxplot_haddock_by_antibody <- make_h5_boxplot_by_antibody(y = "haddock_score_mean", y_lab = "◀ HADDOCK Score")
 
 ## Total Score
-boxplot_total_by_antibody <- make_h5_boxplot_by_antibody(y = "total_mean", y_lab = "Mean Total Energy")
+boxplot_total_by_antibody <- make_h5_boxplot_by_antibody(y = "total_mean", y_lab = "◀ Total Energy")
 ```
 
 #### Place on single plot
@@ -138,7 +144,7 @@ boxplots_by_antibody_grid = ggarrange(boxplot_vdw_by_antibody,
                                  boxplot_bsa_by_antibody,
                                  boxplot_haddock_by_antibody,
                                  boxplot_total_by_antibody,
-                                 labels = c("A.", "B.", "C.", "D.", "E.", "F."),
+                                 labels = c("a", "b", "c", "d", "e", "f"),
                                  ncol = 2, nrow = 3)
 
 # boxplots_by_antibody_grid
@@ -197,6 +203,7 @@ make_mutation_boxplot <- function(x, y, x_lab, y_lab, ref_aa){
       # scale_fill_manual(values = uncc_colors) +
       scale_fill_manual(values = c("grey", "#A49665")) +
       theme_linedraw() +
+      theme_minimal() +
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
             line = element_line(colour = "grey"),
             axis.line = element_line(color = "grey"),
@@ -249,12 +256,12 @@ met_plot_df <- data.frame(
     "total_mean"
   ),
   y_lab = c(
-    "Mean van der Waals Energy",
-    "Mean Electrostatic Energy",
-    "Mean Desolvation Energy",
-    "Mean Buried Surface Area",
-    "Mean HADDOCK Score",
-    "Mean Total Energy"
+    "◀ Van der Waals Energy",
+    "◀ Electrostatic Energy",
+    "◀ Desolvation Energy",
+    "Buried Surface Area ▶",
+    "◀ HADDOCK Score",
+    "◀ Total Energy"
   )
 )
 
@@ -289,10 +296,10 @@ mutation_plots_grid
 
 ```{r}
 ## Two Rows Only
-# ggsave("../../../figures/boxplots_by_mutation_metric_grid_vdw.pdf", width = 16.5, height = 6, units = "in")
+ggsave("../../../figures/boxplots_by_mutation_metric_grid_vdw.pdf", width = 16.5, height = 6, units = "in")
 
 ## Full Grid
-ggsave("../../../figures/boxplots_by_mutation_metric_grid.pdf", width = 12.75, height = 16.5, units = "in")
+# ggsave("../../../figures/boxplots_by_mutation_metric_grid.pdf", width = 12.75, height = 16.5, units = "in")
 ```
 
 ## Heatmaps
@@ -361,10 +368,12 @@ ggsave("../../figures/dendro_vdw_grid.pdf", width = 5.5, height = 11, units = "i
 ```{r}
 make_h5_scatter_by_order <- function(y, y_lab){
   
-  plot <- ggplot(data %>% filter(#antigen_collection_year >= 2000,
+  filtered_data <- data %>% filter(#antigen_collection_year >= 2000,
                                  # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
                                 antigen_host_order %in% c("Primates")
-  ) %>% mutate(antigen_host_order = "Humans"),
+  ) %>% mutate(antigen_host_order = "Humans")
+  
+  plot <- ggplot(filtered_data,
   aes_string(
     x = "antigen_collection_year",
     y = y,
@@ -383,8 +392,13 @@ make_h5_scatter_by_order <- function(y, y_lab){
     stat_cor(method = "spearman",
              color = "black",
              label.x = 2000,
-             label.y = min(data[[y]])
+             label.y = min(filtered_data[[y]])
     ) +
+    # annotate("text", 
+    #          x = 2020, 
+    #          y = min(filtered_data[[y]]), 
+    #          label = paste("n = ", nrow(filtered_data))
+    #          ) +
     # xlim(2000, 2024) + 
     scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
     # scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
@@ -394,7 +408,7 @@ make_h5_scatter_by_order <- function(y, y_lab){
          x = 'Collection Year',
          color = "Host Order") +
     theme_linedraw() +
-    # theme_minimal() +
+    theme_minimal() +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
           line = element_line(colour = "grey"),
           axis.line = element_line(color = "grey"),
@@ -412,22 +426,22 @@ make_h5_scatter_by_order <- function(y, y_lab){
 
 ```{r}
 ## van der Waals Energy
-scatter_vdw_by_year <- make_h5_scatter_by_order(y = "vdw_mean", y_lab = "Mean van der Waals Energy" )
+scatter_vdw_by_year <- make_h5_scatter_by_order(y = "vdw_mean", y_lab = "◀ Van der Waals Energy" )
 
 ## Electrostatic Energy
-scatter_elec_by_year <- make_h5_scatter_by_order(y = "elec_mean", y_lab = "Mean Electrostatic Energy")
+scatter_elec_by_year <- make_h5_scatter_by_order(y = "elec_mean", y_lab = "◀ Electrostatic Energy")
 
 ## Desolvation Energy
-scatter_desolv_by_year <- make_h5_scatter_by_order(y = "desolv_mean", y_lab = "Mean Desolvation Energy")
+scatter_desolv_by_year <- make_h5_scatter_by_order(y = "desolv_mean", y_lab = "◀ Desolvation Energy")
 
 ## Buried Surface Area
-scatter_bsa_by_year <- make_h5_scatter_by_order(y = "bsa_mean", y_lab = "Mean Buried Surface Area")
+scatter_bsa_by_year <- make_h5_scatter_by_order(y = "bsa_mean", y_lab = "Buried Surface Area ▶")
 
 ## HADDOCK Score
-scatter_haddock_by_year <- make_h5_scatter_by_order(y = "haddock_score_mean", y_lab = "Mean HADDOCK Score")
+scatter_haddock_by_year <- make_h5_scatter_by_order(y = "haddock_score_mean", y_lab = "◀ HADDOCK Score")
 
 ## Total Score
-scatter_total_by_year <- make_h5_scatter_by_order(y = "total_mean", y_lab = "Mean Total Energy")
+scatter_total_by_year <- make_h5_scatter_by_order(y = "total_mean", y_lab = "◀ Total Energy")
 ```
 
 ### Place on single plot
@@ -439,7 +453,7 @@ scatter_by_year_grid = ggarrange(scatter_vdw_by_year,
                                  scatter_bsa_by_year,
                                  scatter_haddock_by_year,
                                  scatter_total_by_year,
-                                 labels = c("A.", "B.", "C.", "D.", "E.", "F."),
+                                 labels = c("a", "b", "c", "d", "e", "f"),
                                  ncol = 3, nrow = 2)
 
 scatter_by_year_grid
