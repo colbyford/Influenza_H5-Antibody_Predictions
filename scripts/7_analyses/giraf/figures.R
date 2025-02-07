@@ -72,10 +72,12 @@ numir_correlations <- giraf_data_full %>%
   filter(p_value < 0.05)
 
 ### GED Plot with all Antibodies
-ged_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194"),
+ged_scatter_plot_data <- giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194"),
   # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
   antigen_host_order %in% c("Primates")
-) %>% mutate(antigen_host_order = "Humans"),
+) %>% mutate(antigen_host_order = "Humans")
+
+ged_scatter_plot <- ggplot(ged_scatter_plot_data,
 aes_string(
   x = "antigen_collection_year",
   y = "ged",
@@ -96,6 +98,11 @@ aes_string(
            label.x = 2000,
            label.y = min(giraf_data_full$ged)
   ) +
+  annotate("text",
+           x = 2020,
+           y = min(giraf_data_full$ged),
+           label = paste("n = ", nrow(ged_scatter_plot_data))
+           ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   # scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
   scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
@@ -105,7 +112,7 @@ aes_string(
        x = 'Collection Year',
        color = "Host Order") +
   theme_linedraw() +
-  # theme_minimal() +
+  theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
         line = element_line(colour = "grey"),
         axis.line = element_line(color = "grey"),
@@ -118,9 +125,12 @@ aes_string(
 # ged_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
 #   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 # ),
-ged_scatter_plot_fabs <- ggplot(giraf_data_full %>% 
-                                  mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
-                                  filter(comparison %in% c(ged_correlations$comparison)) %>% mutate(antigen_host_order = "Humans"),
+
+ged_scatter_plot_fabs_data <- giraf_data_full %>% 
+  mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
+  filter(comparison %in% c(ged_correlations$comparison)) %>% mutate(antigen_host_order = "Humans")
+
+ged_scatter_plot_fabs <- ggplot(ged_scatter_plot_fabs_data,
 aes_string(
   x = "antigen_collection_year",
   y = "ged",
@@ -141,6 +151,11 @@ aes_string(
            label.x = 2000,
            label.y = min(giraf_data_full$ged) + 5
   ) +
+  annotate("text",
+           x = 2020,
+           y = min(giraf_data_full$ged) + 5,
+           label = paste("n = ", nrow(ged_scatter_plot_fabs_data))
+  ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   # scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
   scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
@@ -150,7 +165,7 @@ aes_string(
        x = 'Collection Year',
        color = "Host Order") +
   theme_linedraw() +
-  # theme_minimal() +
+  theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
         line = element_line(colour = "grey"),
         axis.line = element_line(color = "grey"),
@@ -160,10 +175,13 @@ aes_string(
   )
 
 ### Number of Interfacing Residues plot with all antibodies
-numir_scatter_plot <- ggplot(giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
+
+numir_scatter_plot_data <- giraf_data_full %>% filter(#antibody_id %in% c("AVFluIgG01", "FLD194", "H5.3"),
   # antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
   antigen_host_order %in% c("Primates")
-) %>% mutate(antigen_host_order = "Humans"),
+) %>% mutate(antigen_host_order = "Humans")
+
+numir_scatter_plot <- ggplot(numir_scatter_plot_data,
 aes_string(
   x = "antigen_collection_year",
   y = "num_ir",
@@ -184,6 +202,11 @@ aes_string(
            label.x = 2000,
            label.y = min(giraf_data_full$num_ir)
   ) +
+  annotate("text",
+           x = 2020,
+           y = min(giraf_data_full$num_ir),
+           label = paste("n = ", nrow(numir_scatter_plot_data))
+  ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   # scale_color_manual(values = c("#005035", "#005035", "#802F2D")) + ## UNCC Colors
   scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
@@ -193,7 +216,7 @@ aes_string(
        x = 'Collection Year',
        color = "Host Order") +
   theme_linedraw() +
-  # theme_minimal() +
+  theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
         line = element_line(colour = "grey"),
         axis.line = element_line(color = "grey"),
@@ -206,9 +229,12 @@ aes_string(
 # numir_scatter_plot_fabs <- ggplot(giraf_data_full %>% filter(antibody_id %in% c("AVFluIgG01", "FLD194", "3C11"),
 #   antigen_host_order %in% c("Anseriformes", "Galliformes", "Primates")
 # ),
-numir_scatter_plot_fabs <- ggplot(giraf_data_full %>% 
-                                    mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
-                                    filter(comparison %in% c(numir_correlations$comparison)) %>% mutate(antigen_host_order = "Humans"),
+
+numir_scatter_plot_fabs_data <- giraf_data_full %>% 
+  mutate(comparison = paste0(antigen_host_order, "__", antibody_id)) %>% 
+  filter(comparison %in% c(numir_correlations$comparison)) %>% mutate(antigen_host_order = "Humans")
+
+numir_scatter_plot_fabs <- ggplot(numir_scatter_plot_fabs_data,
 aes_string(
   x = "antigen_collection_year",
   y = "num_ir",
@@ -229,6 +255,11 @@ aes_string(
            label.x = 2000,
            label.y = min(giraf_data_full$num_ir) + 2
   ) +
+  annotate("text",
+           x = 2020,
+           y = min(giraf_data_full$num_ir) + 2,
+           label = paste("n = ", nrow(numir_scatter_plot_fabs_data))
+  ) +
   scale_x_continuous(breaks=c(2000,2005,2010,2015,2020,2024), limits = c(2000, 2024)) +
   # scale_color_manual(values = c("#005035", "#802F2D")) + ## UNCC Colors
   scale_color_manual(values = c("#802F2D")) + ## UNCC Colors
@@ -238,7 +269,7 @@ aes_string(
        x = 'Collection Year',
        color = "Host Order") +
   theme_linedraw() +
-  # theme_minimal() +
+  theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
         line = element_line(colour = "grey"),
         axis.line = element_line(color = "grey"),
@@ -252,10 +283,11 @@ ggarrange(ged_scatter_plot,
           ged_scatter_plot_fabs,
           numir_scatter_plot,
           numir_scatter_plot_fabs,
-          labels = c("A.", "B.", "C.", "D."),
-          ncol = 1, nrow = 4, align = "hv")
+          labels = c("a", "b", "c", "d"),
+          ncol = 4, nrow = 1, align = "hv")
 
 ## Save plot
 # ggsave("../../../figures/giraf_scatter_by_year.pdf", width = 12.75, height = 8.25, units = "in")
 # ggsave("../../../figures/giraf_scatter_by_year_Primates.pdf", width = 8.5, height = 7.5, units = "in")
-ggsave("../../../figures/giraf_scatter_by_year_Humans.pdf", width = 5, height = 14, units = "in")
+# ggsave("../../../figures/giraf_scatter_by_year_Humans.pdf", width = 5, height = 14, units = "in")
+ggsave("../../../figures/giraf_scatter_by_year_Humans.pdf", width = 14, height = 5, units = "in")
