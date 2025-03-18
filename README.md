@@ -2,7 +2,12 @@
 
 <h3 align="right">Colby T. Ford, Shirish Yasa, Khaled Obeid, Rafael Jaimes III, Phillip J. Tomezsko, <br>Sayal Guirales-Medrano, Richard Allen White III, and Daniel Janies</h3>
 
-[![Preprint](https://img.shields.io/badge/bioRxiv-10.1101/2024.07.14.603367-bb2635?style=for-the-badge&logo=read.cv)](https://www.biorxiv.org/content/10.1101/2024.07.14.603367)
+<!--[![Preprint](https://img.shields.io/badge/bioRxiv-10.1101/2024.07.14.603367-bb2635?style=for-the-badge&logo=read.cv)](https://www.biorxiv.org/content/10.1101/2024.07.14.603367)-->
+
+[![Paper](https://img.shields.io/badge/Lancet_eBioMedicine-10.1016/j.ebiom.2025.105632-1e5499?style=for-the-badge&logo=read.cv)](https://www.thelancet.com/journals/ebiom/article/PIIS2352-3964(25)00076-3/fulltext)
+
+
+
 
 <!--![Interface Example](figures/structures/media/UNCC_H5_mediaheader_AVFluIg03__EPI3358339.png)-->
 
