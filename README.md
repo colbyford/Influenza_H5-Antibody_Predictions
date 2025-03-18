@@ -49,3 +49,24 @@
     - Phylogenetics: [7_analyses/phylogenetics](scripts/7_analyses/phylogenetics)
     - _GIRAF_ Graph Analyses: [scripts/7_analyses/giraf](scripts/7_analyses/giraf)
 
+
+## Citation
+
+Ford, C. T., Yasa, S., Obeid, K., Jaimes III, R., Tomezsko, P. J., Guirales-Medrano, S., White III, R. A., and Janies, D. (2025). Large-scale computational modelling of H5 influenza variants against HA1-neutralising antibodies. _eBioMedicine_, 114. doi:10.1016/j.ebiom.2025.105632
+
+
+```bibtex
+@article{ford2025,
+    author = {Colby T. Ford, Colby T. and Yasa, Shirish and Obeid, Khaled and Jaimes III, Rafael and Tomezsko, Phillip J. and Guirales-Medrano, Sayal and White III, Richard Allen and Janies, Daniel},
+    title = {{Large-Scale Computational Modelling of H5 Influenza Variants Against HA1-Neutralising Antibodies}},
+    year = {2025},
+    month = {Apr},
+    day = {01},
+    publisher = {Elsevier},
+    volume = {114},
+    issn = {2352-3964},
+    doi = {10.1016/j.ebiom.2025.105632},
+    url = {https://doi.org/10.1016/j.ebiom.2025.105632},
+    journal = {Lancet eBioMedicine}
+}
+```
