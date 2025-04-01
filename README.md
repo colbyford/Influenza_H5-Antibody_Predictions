@@ -57,7 +57,7 @@ Ford, C. T., Yasa, S., Obeid, K., Jaimes III, R., Tomezsko, P. J., Guirales-Medr
 
 ```bibtex
 @article{ford2025,
-    author = {Colby T. Ford, Colby T. and Yasa, Shirish and Obeid, Khaled and Jaimes III, Rafael and Tomezsko, Phillip J. and Guirales-Medrano, Sayal and White III, Richard Allen and Janies, Daniel},
+    author = {Ford, Colby T. and Yasa, Shirish and Obeid, Khaled and Jaimes III, Rafael and Tomezsko, Phillip J. and Guirales-Medrano, Sayal and White III, Richard Allen and Janies, Daniel},
     title = {{Large-Scale Computational Modelling of H5 Influenza Variants Against HA1-Neutralising Antibodies}},
     year = {2025},
     month = {Apr},
