@@ -6,9 +6,6 @@
 
 [![Paper](https://img.shields.io/badge/Lancet_eBioMedicine-10.1016/j.ebiom.2025.105632-1e5499?style=for-the-badge&logo=read.cv)](https://www.thelancet.com/journals/ebiom/article/PIIS2352-3964(25)00076-3/fulltext)
 
-
-
-
 <!--![Interface Example](figures/structures/media/UNCC_H5_mediaheader_AVFluIg03__EPI3358339.png)-->
 
 ![Interface Example](figures/structures/media/Blender_FLD194__EPI3158642_combined_001.png)
