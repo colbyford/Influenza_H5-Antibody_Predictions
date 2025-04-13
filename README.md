@@ -10,6 +10,13 @@
 
 ![Interface Example](figures/structures/media/Blender_FLD194__EPI3158642_combined_001.png)
 
+
+## Media Mentions
+
+- "The Great Cellular Heist" - Inside UNC Charlotte: https://inside.charlotte.edu/featured-stories/the-great-cellular-heist/
+- Forbes: https://www.forbes.com/sites/innovationrx/2025/04/02/innovationrx-trump-administration-health-agency-layoffs-threaten-biotech-innovation/
+- Eureka Alert: https://www.eurekalert.org/news-releases/1077418
+
 ## Data
 
 ### Outputs:
