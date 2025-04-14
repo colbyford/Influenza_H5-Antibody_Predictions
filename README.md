@@ -14,6 +14,7 @@
 ## Media Mentions
 
 - "The Great Cellular Heist" - Inside UNC Charlotte: https://inside.charlotte.edu/featured-stories/the-great-cellular-heist/
+- US News: https://www.usnews.com/news/health-news/articles/2025-04-05/experts-warn-bird-flu-could-pose-growing-risk-to-human-health
 - Forbes: https://www.forbes.com/sites/innovationrx/2025/04/02/innovationrx-trump-administration-health-agency-layoffs-threaten-biotech-innovation/
 - Eureka Alert: https://www.eurekalert.org/news-releases/1077418
 
